@@ -6,6 +6,7 @@ typedef unsigned int uint;
 
 #include "Array.h"
 #include "Lists.h"
+#include "vec3.h"
 
 template<class T>
 void List_to_Array(Array<T>& arr, Lists<T>& list);
