@@ -1,7 +1,30 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!--Config file for the game-->
 <config>
+  <audio>
+    <master_volume value="100"/>
+  </audio>
+  <input>
+ 
+  </input>
+  <render>
+    <vsync value="0"/>
+    <scale value="1"/>
+  </render>
+  <textures>
+    <textures_res value="1024"/>
+  </textures>
 
-  <name>Mysuper awesome game with XML</name>
+  <name>Mysuper megasuperawesome game with XML</name>
+  <window>
+    <fullscreen value="false"/>
+    <borderless value="false"/>
+    <resizable value="true"/>
+    <fullscreen_window value="false"/>
+    <title value="replace title"/>
+    <width value="1024"/>
+    <height value="768"/>
+    <scale value="1"/>
+  </window>
 
 </config>

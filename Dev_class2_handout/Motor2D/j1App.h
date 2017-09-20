@@ -46,6 +46,8 @@ public:
 	int GetArgc() const;
 	const char* GetArgv(int index) const;
 
+	xml_node* GetNode(p2SString str);
+
 private:
 
 	// Call modules before each loop iteration
@@ -73,6 +75,7 @@ public:
 	j1Audio*			audio;
 	j1Scene*			scene;
 
+	xml_node node;
 
 private:
 
@@ -85,7 +88,6 @@ private:
 	// a xml_node to read specific branches of the xml
 
 	xml_document document;
-	xml_node node;
 	xml_parse_result result;
 
 

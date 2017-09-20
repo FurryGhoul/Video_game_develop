@@ -85,8 +85,8 @@ bool j1App::Awake()
 		// TODO 7: Add a new argument to the Awake method to receive a pointer to a xml node.
 		// If the section with the module name exist in config.xml, fill the pointer with the address of a valid xml_node
 		// that can be used to read all variables from that section. Send nullptr if the section does not exist in config.xml
-
-		ret = item->data->Awake();
+		
+		ret = item->data->Awake(GetNode(item->data->name.GetString()));
 		item = item->next;
 	}
 
@@ -235,4 +235,9 @@ const char* j1App::GetArgv(int index) const
 		return args[index];
 	else
 		return NULL;
+}
+
+xml_node* j1App::GetNode(p2SString str) {
+	xml_node Nodecheck = node.child("config").child("str");
+	return &Nodecheck;
 }
