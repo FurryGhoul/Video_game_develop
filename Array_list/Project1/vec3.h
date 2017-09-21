@@ -1,9 +1,11 @@
-#pragma once
 #include <math.h>
 template<class T>
 class vec3
 {
 public:
+
+	T x, y, z;
+
 	vec3() {}
 	
 	vec3(T i, T j, T k) {
@@ -12,78 +14,81 @@ public:
 		z = k;
 	}
 
-	vec3(const vec3& a) {
-		x = a.x;
-		y = a.y;
-		z = a.z;
+	vec3(const vec3& vec_2) {
+		x = vec_2.x;
+		y = vec_2.y;
+		z = vec_2.z;
 	}
 	~vec3() {}
 
-	vec3 operator+(vec3& a) {
+	vec3 operator+(const vec3& vec_2) {
 
-		vec3 c;
+		vec3 vec_3;
 
-		c.x = a.x + x;
-		c.y = a.y + y;
-		c.z = a.z + z;
+		vec_3.x = vec_2.x + x;
+		vec_3.y = vec_2.y + y;
+		vec_3.z = vec_2.z + z;
 
-		return c;
+		return vec3;
 	}
 
-	vec3 operator-(const vec3& a) {
+	vec3 operator-(const vec3& vec_2) {
 
-		vec3 c;
+		vec3 vec_3;
 
-		c.x = x - a.x;
-		c.y = y - a.y;
-		c.z = z - a.z;
+		vec_3.x = x - vec_2.x;
+		vec_3.y = y - vec_2.y;
+		vec_3.z = z - vec_2.z;
 
-		return c;
+		return vec_3;
 	}
 
-	vec3 operator =  {
-		
-		vec3 c;
+	vec3 operator =(const vec3& vec_2)  {
 
-		c.x = x;
-		c.y = y;
-		c.z = z;
-
-		return (c);
-	}
-
-
-	vec3& operator+=(const vec3 a) {
-
-		x = x + b.x;
-		y = y + b.y;
-		z = z + b.z;
-
-		return this;
-
-	}
-	vec3& operator-=(const vec3 a) {
-		
-		x = x - a.x;
-		y = y - a.y;
-		z = z - a.z;
+		x = vec_2.x;
+		y = vec_2.y;
+		z = vec_2.z;
 
 		return this;
 	}
 
-	bool operator==(vec3 a) {
 
-		return a.x == x && a.y == y && a.z == z;
+	vec3 operator+=(const vec3& vec_2) {
+
+		x = x + vec_2.x;
+		y = y + vec_2.y;
+		z = z + vec_2.z;
+
+		return this;
 
 	}
-	bool operator!=(vec3 a) {
+	vec3 operator-=(const vec3& vec_2) {
+		
+		x = x - vec_2.x;
+		y = y - vec_2.y;
+		z = z - vec_2.z;
+
+		return this;
+	}
+
+	bool operator==(const vec3& vec_2) {
+
+		return vec_2.x == x && vec_2.y == y && vec_2.z == z;
+
+	}
+	bool operator!=(const vec3& a) {
 
 		return a.x != x || a.y != y || a.z != z;
 
 	}
 
-	T normalize() {
-		return sqrt(x*x + y*y + z*z);
+	void normalize() {
+		
+		T m=sqrt(x*x + y*y + z*z);
+
+		x = x / m;
+		y = y / m;
+		z = z / m;
 	}
 	
 	vec3& Zero() {
@@ -97,12 +102,9 @@ public:
 		return x == 0 && y == 0;
 	}
 
-	T Distance_to( const vec3 a) {
+	T Distance_to( const vec3& vec_2) {
 
-		return sqrt((a.x - x)*(a.x - x) + (a.y - y)*(a.y - y) + (a.z - z)*(a.z - z));
+		return sqrt((vec_2.x - x)*(vec_2.x - x) + (vec_2.y - y)*(vec_2.y - y) + (vec_2.z - z)*(vec_2.z - z));
 	}
-
-private:
-	T x, y, z;
 
 };
