@@ -5,9 +5,16 @@
     <title>Game Development Testbed</title>
     <organization>UPC</organization>
   </app>
+  
+  <audio>
+    <music_volume value="128"/>
+    <fx_volume value="100"/>
+  </audio>
 	
   <renderer>
     <vsync value="false"/>
+    <camera_x value="0" />
+    <camera_y value="0" />
   </renderer>
 
   <window>

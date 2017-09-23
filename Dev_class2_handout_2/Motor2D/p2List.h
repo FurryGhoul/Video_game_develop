@@ -32,8 +32,8 @@ class p2List
 
 public:
 
-	p2List_item<tdata>*   start;
-	p2List_item<tdata>*   end;
+	p2List_item<tdata>*   start;	//starts to read by the first module
+	p2List_item<tdata>*   end;		//starts to read by the last module
 
 private:
 

@@ -155,13 +155,13 @@ void j1App::FinishUpdate()
 	if (save == true) {
 		if (load==false)
 		{
-			//Save();
+			Save_Modules();
 		}	
 		save = false;
 	}
 
 	if (load == true) {
-		//Load();
+		Load_Modules();
 		load = false;
 	}
 }
@@ -284,13 +284,68 @@ const void j1App::Call_Load() {
 	load = true;
 }
 
-
-
-
-// TODO 3: Create a simulation of the xml file to read 
-
 // TODO 4: Create a method to actually load an xml file
 // then call all the modules to load themselves
+void j1App::Load_Modules() {
+
+	//bool ret = true;
+	p2List_item<j1Module*>* item;
+	j1Module* pModule = NULL;
+
+	item = modules.start;
+
+	pugi::xml_parse_result result = config_file.load_file("config_camera.xml");
+
+	if (result == NULL)
+	{
+		LOG("////////Could not load map xml file config.xml. pugi error: %s", result.description());
+
+	}
+	else
+	{
+		config = config_file.child("config");
+	}
+	
+
+	while (item != NULL /*&& ret == true*/)
+	{
+		//this is Loading the section of the configuration as argument
+		item->data->Load(config.child(item->data->name.GetString()));
+		item = item->next;
+	}
+}
 
 // TODO 7: Create a method to save the current state
+void j1App::Save_Modules() {
+
+	//bool ret = true;
+	p2List_item<j1Module*>* item;
+	j1Module* pModule = NULL;
+
+	item = modules.start;
+
+	// TODO 3: Create a simulation of the xml file to read 
+	pugi::xml_document save_arxive;
+	pugi::xml_node save_node;
+
+	//this node creates the element config 
+	save_node = save_arxive.append_child("config");
+
+	//this loop creates a element in the xml for every module inside the config
+	while (item != NULL /*&& ret == true*/)
+	{
+
+		item->data->Save(save_node.append_child(item->data->name.GetString()));
+		item = item->next;
+
+	}
+
+	save_arxive.save_file("config_camera.xml");
+}
+
+
+
+
+
+
 

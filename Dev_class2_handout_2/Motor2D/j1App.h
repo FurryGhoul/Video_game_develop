@@ -49,8 +49,12 @@ public:
 	// will one execute by the very end of the frame
 	// Load / Save
 
+	//Call to Save modules
 	const void Call_Save();
+
+	//Call to Load modules
 	const void Call_Load();
+
 
 private:
 
@@ -72,6 +76,12 @@ private:
 	// Call modules after each loop iteration
 	bool PostUpdate();
 
+	//Call modules to star load (void to test it)
+	void Load_Modules();
+
+	//Call modules to star Save (void to test it)
+	void Save_Modules();
+
 
 public:
 
@@ -82,13 +92,13 @@ public:
 	j1Textures*			tex;
 	j1Audio*			audio;
 	j1Scene*			scene;
-	
+	pugi::xml_document	config_file;
 private:
 
 	p2List<j1Module*>	modules;
 	uint				frames;
 	float				dt;
-	pugi::xml_document	config_file;
+	
 	pugi::xml_document  savegame;
 	pugi::xml_node		config;
 	pugi::xml_node		app_config;

@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
-<save>
+<config>
 	<input />
 	<window />
 	<textures />
 	<audio />
 	<scene />
 	<renderer>
-		<camera x="228" y="291" />
+		<camera_x value="0" />
+		<camera_y value="544" />
 	</renderer>
-</save>
+</config>

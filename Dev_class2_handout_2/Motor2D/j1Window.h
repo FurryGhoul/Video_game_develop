@@ -1,5 +1,5 @@
 #ifndef __j1WINDOW_H__
-#define __j1WINDOW_H__
+#define __j1WINDOW_H__SetTitle
 
 #include "j1Module.h"
 
@@ -29,6 +29,12 @@ public:
 
 	// Retrieve window scale
 	uint GetScale() const;
+
+	//Load the configuration
+	virtual void Save(pugi::xml_node& node);
+
+	//Save the configuration
+	virtual void Load(pugi::xml_node& node);
 
 public:
 	//The window we'll be rendering to

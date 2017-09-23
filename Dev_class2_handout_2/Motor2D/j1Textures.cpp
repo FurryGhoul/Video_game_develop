@@ -118,3 +118,9 @@ void j1Textures::GetSize(const SDL_Texture* texture, uint& width, uint& height) 
 {
 	SDL_QueryTexture((SDL_Texture*)texture, NULL, NULL, (int*) &width, (int*) &height);
 }
+
+//Load the configuration
+void j1Textures::Save(pugi::xml_node& node) {}
+
+//Save the configuration
+void  j1Textures::Load(pugi::xml_node& node) {}

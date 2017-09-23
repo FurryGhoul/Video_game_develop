@@ -156,3 +156,9 @@ void j1Input::GetMouseMotion(int& x, int& y)
 	x = mouse_motion_x;
 	y = mouse_motion_y;
 }
+
+//Load the configuration
+void j1Input::Save(pugi::xml_node& node) {}
+
+//Save the configuration
+void  j1Input::Load(pugi::xml_node& node) {}

@@ -51,6 +51,9 @@ bool j1Audio::Awake(pugi::xml_node& config)
 		ret = true;
 	}
 
+	music_volume = config.child("music_volume").attribute("value").as_int();
+	fx_volume = config.child("fx_volume").attribute("value").as_int();
+
 	return ret;
 }
 
@@ -104,6 +107,7 @@ bool j1Audio::PlayMusic(const char* path, float fade_time)
 	}
 
 	music = Mix_LoadMUS(path);
+	Mix_VolumeMusic(music_volume);
 
 	if(music == NULL)
 	{
@@ -168,7 +172,14 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 	if(id > 0 && id <= fx.count())
 	{
 		Mix_PlayChannel(-1, fx[id - 1], repeat);
+		Mix_VolumeChunk(fx[id-1],fx_volume);
 	}
 
 	return ret;
 }
+
+//Load the configuration
+void j1Audio::Save(pugi::xml_node& node) {}
+
+//Save the configuration
+void  j1Audio::Load(pugi::xml_node& node) {}

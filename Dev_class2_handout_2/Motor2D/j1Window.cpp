@@ -112,3 +112,9 @@ uint j1Window::GetScale() const
 {
 	return scale;
 }
+
+//Load the configuration
+void j1Window::Save(pugi::xml_node& node){}
+
+//Save the configuration
+void  j1Window::Load(pugi::xml_node& node){}
