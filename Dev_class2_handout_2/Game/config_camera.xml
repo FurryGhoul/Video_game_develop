@@ -6,7 +6,7 @@
 	<audio />
 	<scene />
 	<renderer>
-		<camera_x value="0" />
-		<camera_y value="544" />
+		<camera_x value="720" />
+		<camera_y value="-3" />
 	</renderer>
 </config>
