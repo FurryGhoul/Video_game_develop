@@ -12,6 +12,10 @@
 #include "j1Scene.h"
 #include "j1App.h"
 
+#include "SDL/include/SDL.h"
+#include "SDL_mixer\include\SDL_mixer.h"
+#pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
+
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
@@ -116,6 +120,8 @@ bool j1App::Update()
 
 	if(ret == true)
 		ret = PostUpdate();
+
+	Mix_VolumeMusic(App->audio->music_volume);
 
 	FinishUpdate();
 	return ret;

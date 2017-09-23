@@ -13,6 +13,9 @@ class j1Textures;
 class j1Audio;
 class j1Scene;
 
+struct _Mix_Music;
+struct Mix_Chunk;
+
 class j1App
 {
 public:

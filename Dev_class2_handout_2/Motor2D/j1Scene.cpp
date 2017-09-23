@@ -63,6 +63,12 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		App->Call_Load();
 
+	if (App->input->GetKey(SDL_SCANCODE_KP_PLUS) == KEY_DOWN && App->audio->music_volume <= 128)
+		App->audio->music_volume += 10;
+
+	if (App->input->GetKey(SDL_SCANCODE_KP_MINUS) == KEY_DOWN && App->audio->music_volume >= 0) 
+		App->audio->music_volume -= 10;
+
 	App->render->Blit(img, 0, 0);
 	return true;
 }

@@ -3,10 +3,12 @@
 	<input />
 	<window />
 	<textures />
-	<audio />
+	<audio>
+		<music_volume value="10" />
+	</audio>
 	<scene />
 	<renderer>
-		<camera_x value="720" />
-		<camera_y value="-3" />
+		<camera_x value="-42" />
+		<camera_y value="333" />
 	</renderer>
 </config>
