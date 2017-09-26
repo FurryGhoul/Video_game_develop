@@ -121,6 +121,7 @@ bool j1App::Update()
 	if(ret == true)
 		ret = PostUpdate();
 
+	//Music volume function
 	Mix_VolumeMusic(App->audio->music_volume);
 
 	FinishUpdate();

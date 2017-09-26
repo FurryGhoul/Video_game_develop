@@ -181,7 +181,7 @@ bool j1Audio::PlayFx(unsigned int id, int repeat)
 }
 
 //Load the configuration
-void j1Audio::Save(pugi::xml_node& node) {
+void j1Audio::Save(pugi::xml_node& node)const {
 
 	node.append_child("music_volume").append_attribute("value").set_value(music_volume);
 	LOG("Saving render");
@@ -189,7 +189,7 @@ void j1Audio::Save(pugi::xml_node& node) {
 }
 
 //Save the configuration
-void  j1Audio::Load(pugi::xml_node& node) {
+void  j1Audio::Load(const pugi::xml_node& node) {
 
 	music_volume = node.child("music_volume").attribute("value").as_int();
 	LOG("Loading render");

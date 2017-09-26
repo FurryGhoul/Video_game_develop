@@ -33,10 +33,10 @@ public:
 	bool PlayFx(unsigned int fx, int repeat = 0);
 
 	//Load the configuration
-	virtual void Save(pugi::xml_node& node);
+	virtual void Save(pugi::xml_node& node)const;
 
 	//Save the configuration
-	virtual void Load(pugi::xml_node& node);
+	virtual void Load(const pugi::xml_node& node);
 
 private:
 
