@@ -90,13 +90,54 @@ void j1Map::FillMap(const pugi::xml_document& document) {
 
 	pugi::xml_node aux_node = document.child("map");
 
-	first_map.orientation = aux_node.attribute("orientation").as_string();
-	first_map.renderorder = aux_node.attribute("renderorder").as_string();
+	first_map.orientation = String_to_Enum_2(aux_node.attribute("orientation").as_string());
+	LOG("orientation --> %d", first_map.orientation);
+	first_map.renderorder = String_to_Enum_1(aux_node.attribute("renderorderer").as_string());
+	LOG("Renderorder --> %d", first_map.renderorder);
 	first_map.width = aux_node.attribute("width").as_uint();
+	LOG("width --> %d", first_map.width);
 	first_map.height = aux_node.attribute("height").as_uint();
+	LOG("height --> %d", first_map.height);
 	first_map.tilewidth = aux_node.attribute("tilewidth").as_uint();
+	LOG("tilewidth --> %d", first_map.tilewidth);
 	first_map.tileheight = aux_node.attribute("tileheight").as_uint();
-	first_map.nextobject = aux_node.attribute("nextobject").as_uint();;
+	LOG("tileheight --> %d", first_map.tileheight);
+	first_map.nextobject = aux_node.attribute("nextobjectid").as_uint();
+	LOG("nextobject --> %d", first_map.nextobject);
 
+
+	
+
+	
+}
+
+Map_renderorder j1Map::String_to_Enum_1(p2SString str) {
+	
+	if (str == "right-down")
+		return right_down;
+
+	if (str == "right-up")
+		return right_up;
+
+	if (str == "left-down")
+		return left_down;
+
+	if (str == "left-up")
+		return left_up;
+}
+
+Map_Orientation j1Map::String_to_Enum_2(p2SString str) {
+	
+	if (str == "orthogonal")
+		return orthogonal;
+
+	if (str == "isometric")
+		return isometric;
+
+	if (str == "staggered")
+		return staggered;
+
+	if (str == "hexagonal")
+		return hexagonal;
 
 }

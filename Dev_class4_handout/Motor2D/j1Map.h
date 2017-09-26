@@ -26,7 +26,7 @@ struct Tileset {
 // TODO 1: Create a struct needed to hold the information to Map node
 enum Map_Orientation
 {
-	orthogonal=0,
+	orthogonal,
 	isometric,
 	staggered,
 	hexagonal
@@ -53,7 +53,7 @@ struct Map{
 	uint				tileheight;
 	uint				nextobject;
 
-	Tileset				map_tile[];
+	Tileset				map_tile[10];
 
 };
 
@@ -83,14 +83,17 @@ public:
 	//Load and fill map data
 	void FillMap(const pugi::xml_document& document);
 
+
 private:
 
+	Map_renderorder String_to_Enum_1(p2SString str);
+
+	Map_Orientation String_to_Enum_2(p2SString str);
 
 public:
 
 	// TODO 1: Add your struct for map info as public for now
 	Map first_map;
-	Tileset first_tile;
 
 private:
 
