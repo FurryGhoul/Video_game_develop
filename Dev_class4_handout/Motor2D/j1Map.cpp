@@ -34,6 +34,11 @@ void j1Map::Draw()
 	// TODO 6: Iterate all tilesets and draw all their 
 	// images in 0,0 (you should have only one tileset for now)
 
+	for (uint i = 0; i < first_map.map_tileset.Count(); i++) {
+		
+		App->render->Blit()
+	}
+
 }
 
 // Called before quitting
@@ -90,25 +95,69 @@ void j1Map::FillMap(const pugi::xml_document& document) {
 
 	pugi::xml_node aux_node = document.child("map");
 
+	LOG("-----------------Map Info--------------------------------------");
 	first_map.orientation = String_to_Enum_2(aux_node.attribute("orientation").as_string());
-	LOG("orientation --> %d", first_map.orientation);
-	first_map.renderorder = String_to_Enum_1(aux_node.attribute("renderorderer").as_string());
-	LOG("Renderorder --> %d", first_map.renderorder);
+	LOG("orientation --> %s ( %d )",aux_node.attribute("orientation").as_string(), first_map.orientation);
+
+	first_map.renderorder = String_to_Enum_1(aux_node.attribute("renderorder").as_string());
+	LOG("Renderorder --> %s ( %d )",aux_node.attribute("renderorder").as_string(), first_map.renderorder);
+
 	first_map.width = aux_node.attribute("width").as_uint();
 	LOG("width --> %d", first_map.width);
+
 	first_map.height = aux_node.attribute("height").as_uint();
 	LOG("height --> %d", first_map.height);
+
 	first_map.tilewidth = aux_node.attribute("tilewidth").as_uint();
 	LOG("tilewidth --> %d", first_map.tilewidth);
+
 	first_map.tileheight = aux_node.attribute("tileheight").as_uint();
 	LOG("tileheight --> %d", first_map.tileheight);
+
 	first_map.nextobject = aux_node.attribute("nextobjectid").as_uint();
 	LOG("nextobject --> %d", first_map.nextobject);
 
+	FillTilset(document, first_map.map_tileset);
+	
+
+	LOG("---------------------------------------------------------------");
 
 	
 
 	
+}
+
+void j1Map::FillTilset(const pugi::xml_document& document, p2DynArray<Tileset>& tileset_map) {
+
+	pugi::xml_node tilset;
+	Tileset aux_tileset;
+	uint counter = 1;
+
+	for (tilset = document.child("map").child("tileset"); tilset; tilset = tilset.next_sibling("tileset")) {
+		
+		LOG("-----TileSet %d----", counter);
+
+		aux_tileset.name = tilset.attribute("name").as_string();
+		LOG("Name: %s", aux_tileset.name.GetString());
+
+		aux_tileset.img_source = tilset.attribute("source").as_string();
+		LOG("Image source: %s", aux_tileset.img_source.GetString());
+
+		aux_tileset.tileWidth = tilset.attribute("tilewidth").as_uint();
+		LOG("TileWidth: %d", aux_tileset.tileWidth);
+
+		aux_tileset.tileHeight = tilset.attribute("tileheight").as_uint();
+		LOG("TileHeight: %d", aux_tileset.tileHeight);
+
+		aux_tileset.spacing = tilset.attribute("spacing").as_uint();
+		LOG("Spacing: %d", aux_tileset.spacing);
+
+		aux_tileset.margin = tilset.attribute("margin").as_uint();
+		LOG("Margin: %d", aux_tileset.margin);
+
+		tileset_map.PushBack(aux_tileset);
+		counter++;
+	}
 }
 
 Map_renderorder j1Map::String_to_Enum_1(p2SString str) {

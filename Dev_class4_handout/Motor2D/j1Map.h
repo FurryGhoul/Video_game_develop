@@ -4,6 +4,7 @@
 #include "PugiXml/src/pugixml.hpp"
 #include "p2List.h"
 #include "p2Point.h"
+#include "p2DynArray.h"
 #include "j1Module.h"
 
 // TODO 2: Create a struct to hold information for a TileSet
@@ -16,7 +17,7 @@ struct Tileset {
 	p2SString	img_source;
 
 	uint		tileWidth;
-	uint		tileheight;
+	uint		tileHeight;
 	uint		spacing;
 	uint		margin;
 
@@ -53,7 +54,7 @@ struct Map{
 	uint				tileheight;
 	uint				nextobject;
 
-	Tileset				map_tile[10];
+	p2DynArray<Tileset>	map_tileset;
 
 };
 
@@ -82,6 +83,9 @@ public:
 
 	//Load and fill map data
 	void FillMap(const pugi::xml_document& document);
+
+	//Load and fill tilset
+	void FillTilset(const pugi::xml_document& document, p2DynArray<Tileset>& tileset_map);
 
 
 private:
