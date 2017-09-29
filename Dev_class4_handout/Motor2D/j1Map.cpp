@@ -34,9 +34,10 @@ void j1Map::Draw()
 	// TODO 6: Iterate all tilesets and draw all their 
 	// images in 0,0 (you should have only one tileset for now)
 
-	for (uint i = 0; i < first_map.map_tileset.Count(); i++) {
-		
-		App->render->Blit()
+	for (uint i = 0; i <= first_map.map_tileset.count(); i++) {
+
+		Map_texture = App->tex->Load(first_map.map_tileset[0].img_source.GetString());
+		App->render->Blit(Map_texture, 0, 0);
 	}
 
 }
@@ -78,7 +79,7 @@ bool j1Map::Load(const char* file_name)
 
 	// TODO 4: Create and call a private function to load a tileset
 	// remember to support more any number of tilesets!
-	
+	FillTilset(map_file, first_map.map_tileset);
 
 	if(ret == true)
 	{
@@ -116,8 +117,6 @@ void j1Map::FillMap(const pugi::xml_document& document) {
 
 	first_map.nextobject = aux_node.attribute("nextobjectid").as_uint();
 	LOG("nextobject --> %d", first_map.nextobject);
-
-	FillTilset(document, first_map.map_tileset);
 	
 
 	LOG("---------------------------------------------------------------");
@@ -127,21 +126,24 @@ void j1Map::FillMap(const pugi::xml_document& document) {
 	
 }
 
-void j1Map::FillTilset(const pugi::xml_document& document, p2DynArray<Tileset>& tileset_map) {
+void j1Map::FillTilset(const pugi::xml_document& document, p2List<Tileset>& tileset_map) {
 
 	pugi::xml_node tilset;
 	Tileset aux_tileset;
 	uint counter = 1;
 
+	p2SString source = "maps/";
+
 	for (tilset = document.child("map").child("tileset"); tilset; tilset = tilset.next_sibling("tileset")) {
 		
+
 		LOG("-----TileSet %d----", counter);
 
 		aux_tileset.name = tilset.attribute("name").as_string();
 		LOG("Name: %s", aux_tileset.name.GetString());
 
-		aux_tileset.img_source = tilset.attribute("source").as_string();
-		LOG("Image source: %s", aux_tileset.img_source.GetString());
+		aux_tileset.img_source = (source += tilset.child("image").attribute("source").as_string());
+		LOG("Image source: %s", aux_tileset.img_source);
 
 		aux_tileset.tileWidth = tilset.attribute("tilewidth").as_uint();
 		LOG("TileWidth: %d", aux_tileset.tileWidth);
@@ -155,7 +157,7 @@ void j1Map::FillTilset(const pugi::xml_document& document, p2DynArray<Tileset>& 
 		aux_tileset.margin = tilset.attribute("margin").as_uint();
 		LOG("Margin: %d", aux_tileset.margin);
 
-		tileset_map.PushBack(aux_tileset);
+		tileset_map.add(aux_tileset);
 		counter++;
 	}
 }

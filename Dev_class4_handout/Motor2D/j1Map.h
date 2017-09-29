@@ -6,6 +6,7 @@
 #include "p2Point.h"
 #include "p2DynArray.h"
 #include "j1Module.h"
+#include "SDL/include/SDL.h"
 
 // TODO 2: Create a struct to hold information for a TileSet
 // Ignore Terrain Types and Tile Types for now, but we want the image!
@@ -54,7 +55,7 @@ struct Map{
 	uint				tileheight;
 	uint				nextobject;
 
-	p2DynArray<Tileset>	map_tileset;
+	p2List<Tileset>		map_tileset;
 
 };
 
@@ -85,7 +86,7 @@ public:
 	void FillMap(const pugi::xml_document& document);
 
 	//Load and fill tilset
-	void FillTilset(const pugi::xml_document& document, p2DynArray<Tileset>& tileset_map);
+	void FillTilset(const pugi::xml_document& document, p2List<Tileset>& tileset_map);
 
 
 private:
@@ -104,6 +105,7 @@ private:
 	pugi::xml_document	map_file;
 	p2SString			folder;
 	bool				map_loaded;
+	SDL_Texture*		Map_texture;
 };
 
 #endif // __j1MAP_H__
