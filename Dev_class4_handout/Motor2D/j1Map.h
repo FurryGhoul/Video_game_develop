@@ -23,6 +23,16 @@ struct Tileset {
 	uint		margin;
 
 };
+struct Layer {
+
+	p2SString		name;
+
+	uint			width;
+	uint			height;
+
+	p2List<uint>	data;
+
+};
 
 
 // TODO 1: Create a struct needed to hold the information to Map node
@@ -56,6 +66,7 @@ struct Map{
 	uint				nextobject;
 
 	p2List<Tileset>		map_tileset;
+	p2List<Layer>		map_layers;
 
 };
 
@@ -82,17 +93,24 @@ public:
 	// Load new map
 	bool Load(const char* path);
 
+private:
+
 	//Load and fill map data
 	void FillMap(const pugi::xml_document& document);
 
 	//Load and fill tilset
 	void FillTilset(const pugi::xml_document& document, p2List<Tileset>& tileset_map);
 
+	//Load and fill layers
+	void FillLayer(const pugi::xml_document& document, p2List<Layer>& layer_map);
 
-private:
+	//Log all
+	void LogAll();
 
+	//Transform from string to Map_renderorder enum
 	Map_renderorder String_to_Enum_1(p2SString str);
 
+	//Transform from string to Map_orientation enum
 	Map_Orientation String_to_Enum_2(p2SString str);
 
 public:
@@ -102,10 +120,10 @@ public:
 
 private:
 
-	pugi::xml_document	map_file;
-	p2SString			folder;
-	bool				map_loaded;
-	SDL_Texture*		Map_texture;
+	pugi::xml_document		map_file;
+	p2SString				folder;
+	bool					map_loaded;
+	p2List<SDL_Texture*>	Map_texture;
 };
 
 #endif // __j1MAP_H__
