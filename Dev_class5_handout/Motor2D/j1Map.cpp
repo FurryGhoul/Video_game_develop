@@ -32,6 +32,14 @@ void j1Map::Draw()
 		return;
 
 	// TODO 5: Prepare the loop to draw all tilesets + Blit
+	uint counter = 0;
+	for (int i = 0; i < data.height; i++)
+	{
+		for (int j = 0; j < data.width; j++) 
+		{
+			App->render->Blit(data.tilesets[0]->texture, data.tile_width*j, data.tile_height*i,&data.tilesets[0]->GetTileRect(data.layers[0]->Get(j,i)));
+		}
+	}
 
 		// TODO 9: Complete the draw function
 
@@ -336,3 +344,9 @@ MapLayer::~MapLayer()
 
 	delete[] data;
 }
+
+inline uint MapLayer::Get(int x, int y) const 
+{
+	return x+y*width;
+}
+

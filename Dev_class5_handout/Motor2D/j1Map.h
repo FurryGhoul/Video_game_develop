@@ -9,6 +9,14 @@
 // TODO 1: Create a struct for the map layer
 
 struct MapLayer {
+	// ----------------------------------------------------
+
+	// TODO 6: Short function to get the value of x,y
+
+	inline uint Get(int x, int y) const;
+
+	// ----------------------------------------------------
+	
 
 	p2SString		name;
 
@@ -23,13 +31,7 @@ struct MapLayer {
 
 };
 
-// ----------------------------------------------------
 
-	// TODO 6: Short function to get the value of x,y
-
-
-
-// ----------------------------------------------------
 struct TileSet
 {
 	// TODO 7: Create a method that receives a tile id and returns it's Rectfind the Rect associated with a specific tile id
@@ -102,7 +104,7 @@ private:
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	// TODO 3: Create a method that loads a single laye
-	 bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
+	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 
 public:
 
@@ -114,5 +116,4 @@ private:
 	p2SString			folder;
 	bool				map_loaded;
 };
-
 #endif // __j1MAP_H__
