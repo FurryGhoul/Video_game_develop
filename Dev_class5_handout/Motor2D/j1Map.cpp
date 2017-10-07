@@ -32,28 +32,29 @@ void j1Map::Draw()
 		return;
 	
 	// TODO 5: Prepare the loop to draw all tilesets + Blit
-	uint tile;
-		for (uint layer = 0; layer<data.layers.count(); layer++)
+	uint tile_indx;
+	uint layer_indx;
+		for (layer_indx = 0; layer_indx<data.layers.count(); layer_indx++)
 		{
 			for (int j = 0; j < data.height; j++)
 			{
 				for (int i = 0; i < data.width; i++)
 				{
-					uint id = data.layers[layer]->data[data.layers[layer]->Get(i, j)];
+					uint id = data.layers[layer_indx]->data[data.layers[layer_indx]->Get(i, j)];
 					if (id != 0)
 					{
-						for (tile=0; tile < data.tilesets.count(); tile++)
+						for (tile_indx =0; tile_indx < data.tilesets.count(); tile_indx++)
 						{
-							if (id >= data.tilesets[tile]->firstgid)
+						/*	if (id >= data.tilesets[tile_indx]->firstgid)
 							{
-								id -= (data.tilesets[tile]->firstgid - 1);
+								id -= (data.tilesets[tile_indx]->firstgid - 1);*/
 								break;
-							}
+						/*	}*/
 						}
-						SDL_Rect tile_rect = data.tilesets[tile]->GetTileRect(id);
+						SDL_Rect tile_rect = data.tilesets[tile_indx]->GetTileRect(id);
 						int x = MapToWorld(i, j).x;
 						int y = MapToWorld(i, j).y;
-						App->render->Blit(data.tilesets[tile]->texture, x, y, &tile_rect);
+						App->render->Blit(data.tilesets[tile_indx]->texture, x, y, &tile_rect);
 					}
 				}
 			}
