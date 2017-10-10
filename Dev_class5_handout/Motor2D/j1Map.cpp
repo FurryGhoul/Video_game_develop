@@ -1,6 +1,7 @@
 #include "p2Defs.h"
 #include "p2Log.h"
 #include "j1App.h"
+#include "j1Input.h"
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Map.h"
@@ -46,11 +47,12 @@ void j1Map::Draw()
 				{
 					for (tile_indx =0; tile_indx < data.tilesets.count(); tile_indx++)
 					{
-						if (id >= data.tilesets[tile_indx]->firstgid)
+						/*if (id >= data.tilesets[tile_indx]->firstgid)
 						{
 							id -= (data.tilesets[tile_indx]->firstgid - 1);
 							break;
-						}
+						}*/
+						break;
 					}
 					SDL_Rect tile_rect = data.tilesets[tile_indx]->GetTileRect(id);
 					int x = MapToWorld(i, j).x;
@@ -367,3 +369,15 @@ inline uint MapLayer::Get(int x, int y) const
 	return x+y*width;
 }
 
+iPoint j1Map::GetMouseTile()
+{
+	iPoint point;
+	int mouse_x, mouse_y;
+
+	App->input->GetMousePosition(mouse_x, mouse_y);
+
+	point.x = mouse_x/data.tilesets[0]->tile_width;
+	point.y = mouse_y / data.tilesets[0]->tile_height;
+
+	return point;
+}
