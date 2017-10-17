@@ -128,7 +128,7 @@ public:
 	void DrawBFS();
 	bool IsWalkable(int x, int y) const;
 	void ResetBFS();
-	void GetNeighbors();
+	//void GetNeighbors();
 
 private:
 

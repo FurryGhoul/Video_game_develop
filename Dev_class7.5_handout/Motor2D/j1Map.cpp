@@ -40,16 +40,41 @@ void j1Map::PropagateBFS()
 	// TODO 1: If frontier queue contains elements
 	// pop the last one and calculate its 4 neighbors
 
-	iPoint center;
-
-	if (frontier.Count != 0)
+	iPoint center;									//iPoint of the center node
+	p2List<iPoint> neighbors;						//List of center's neighbors 
+	p2List_item<iPoint>* item;						//item that points in the neighbor's list
+	
+	if (frontier.Count() != 0)
 	{
-		frontier.Pop(center);
+		frontier.Pop(center);						//takes the data of the first element 
+		LOG("X=%d Y=%d",center.x,center.y);			//of the queue and put it in the variable center
 		
-	}
+		for (int i = -1; i < 2; i=i+2)				//bucle that fills the neighbors
+		{
+			iPoint neighbor_vertical;
+			iPoint neighbor_horizontal;
 
+			neighbor_vertical.x = center.x;
+			neighbor_vertical.y = center.y + i;
+			neighbor_horizontal.x = center.x+i;
+			neighbor_horizontal.y = center.y;
+
+			neighbors.add(neighbor_vertical);
+			neighbors.add(neighbor_horizontal);
+		}
+	}
+	
 	// TODO 2: For each neighbor, if not visited, add it
 	// to the frontier queue and visited list
+	for (item = neighbors.start; item; item = item->next)
+	{
+		if (visited.find(item->data) == -1)
+		{
+			frontier.Push(item->data);
+			visited.add(item->data);
+		}
+	}
+	
 }
 
 void j1Map::DrawBFS()
@@ -521,7 +546,3 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 	return ret;
 }
 
-void j1Map::GetNeighbors()
-{
-
-}
