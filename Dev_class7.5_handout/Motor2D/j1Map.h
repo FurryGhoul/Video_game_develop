@@ -128,7 +128,10 @@ public:
 	void DrawBFS();
 	bool IsWalkable(int x, int y) const;
 	void ResetBFS();
-	//void GetNeighbors();
+
+	//Path finding
+	iPoint GetMouseTile();
+	void PathToMouse();
 
 private:
 
@@ -153,6 +156,7 @@ private:
 	/// BFS
 	p2Queue<iPoint>		frontier;
 	p2List<iPoint>		visited;
+	p2List<iPoint>		came_from;
 };
 
 #endif // __j1MAP_H__

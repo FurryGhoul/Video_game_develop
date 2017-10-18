@@ -3,6 +3,7 @@
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Textures.h"
+#include "j1Input.h"
 #include "j1Map.h"
 #include <math.h>
 
@@ -31,6 +32,7 @@ void j1Map::ResetBFS()
 {
 	frontier.Clear();
 	visited.clear();
+	came_from.clear();
 	frontier.Push(iPoint(19, 4));
 	visited.add(iPoint(19, 4));
 }
@@ -70,11 +72,11 @@ void j1Map::PropagateBFS()
 	{
 		if (visited.find(item->data) == -1)
 		{
-			if (IsWalkable(item->data.x,item->data.y) == true)
+			if (IsWalkable(item->data.x, item->data.y) == true)
 			{
 				frontier.Push(item->data);
+				visited.add(item->data);
 			}
-			visited.add(item->data);
 		}
 	}
 	
@@ -111,7 +113,23 @@ void j1Map::DrawBFS()
 
 		App->render->Blit(tileset->texture, pos.x, pos.y, &r);
 	}
+	
 
+	p2List_item<iPoint>* item_path = came_from.end;
+	iPoint point_path;
+
+	while (item_path)
+	{
+		point_path = item_path->data;
+		TileSet* tileset = GetTilesetFromTileId(25);
+
+		SDL_Rect r = tileset->GetTileRect(25);
+		iPoint pos = MapToWorld(point_path.x, point_path.y);
+
+		App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+
+		item_path = item_path->prev;
+	}
 }
 
 bool j1Map::IsWalkable(int x, int y) const
@@ -120,21 +138,38 @@ bool j1Map::IsWalkable(int x, int y) const
 	// and the tile is walkable (tile id 0 in the navigation layer)
 
 	p2List_item<MapLayer*>* item;
+	p2List_item<Properties::Property*>* layer_prop;
 
-	if (x >= 0 && x < data.width && y >= 0 && y <= data.height)
+	/*if (x >= 0 && x < data.width && y >= 0 && y < data.height)
+	{
+		for (item = data.layers.start; item; item = item->next)
+		{
+			for (layer_prop = item->data->properties.list.start; layer_prop; layer_prop = layer_prop->next)
+			{
+				if (layer_prop->data->name == "Navigation" && layer_prop->data->value == 1)
+				{
+					if (item->data->Get(x, y) == 0)
+					{
+						return true;
+					}
+				}
+			}
+		}
+	}*/
+
+	if (x >= 0 && x < data.width && y >= 0 && y < data.height)
 	{
 		for (item = data.layers.start; item; item = item->next)
 		{
 			if (item->data->name == "Colisions")
-			{
-				LOG("id=%d", item->data->data[item->data->Get(x, y)]);
-				if (item->data->data[item->data->Get(x, y)] != 0)
 				{
-					return true;
+					if (item->data->Get(x, y) == 0)
+					{
+						return true;
+					}
 				}
 			}
 		}
-	}
 	
 	return false;
 }
@@ -565,5 +600,62 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 	}
 
 	return ret;
+}
+
+iPoint j1Map::GetMouseTile()
+{
+	int mouse_x;
+	int mouse_y;
+	iPoint tile;
+
+	App->input->GetMousePosition(mouse_x, mouse_y);
+
+	tile = WorldToMap(mouse_x-App->render->camera.x, mouse_y-App->render->camera.y);
+
+	return tile;
+}
+
+void j1Map::PathToMouse()
+{
+	iPoint Goal;
+	iPoint origin;
+	p2List<iPoint> neighbors;
+
+
+	Goal = GetMouseTile();
+
+	while (frontier.Count() != 0)
+	{
+		frontier.Pop(origin);
+
+
+		neighbors.add({ origin.x + 1, origin.y });
+		neighbors.add({ origin.x - 1, origin.y });
+		neighbors.add({ origin.x, origin.y + 1 });
+		neighbors.add({ origin.x, origin.y - 1 });
+
+		for (p2List_item<iPoint>*item = neighbors.start; item; item = item->next)
+		{
+			if (visited.find(item->data) == -1)
+			{
+				if (IsWalkable(item->data.x, item->data.y))
+				{
+					frontier.Push(item->data);
+					visited.add(item->data);
+
+					if (came_from.find(item->data) == -1)
+					{
+						came_from.add(origin);
+						LOG("%d,%d",origin.x, origin.y);
+					}
+				}
+			}
+		}
+
+		if (origin == Goal)
+		{
+			break;
+		}
+	}
 }
 
