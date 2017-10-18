@@ -70,7 +70,10 @@ void j1Map::PropagateBFS()
 	{
 		if (visited.find(item->data) == -1)
 		{
-			frontier.Push(item->data);
+			if (IsWalkable(item->data.x,item->data.y) == true)
+			{
+				frontier.Push(item->data);
+			}
 			visited.add(item->data);
 		}
 	}
@@ -115,7 +118,25 @@ bool j1Map::IsWalkable(int x, int y) const
 {
 	// TODO 3: return true only if x and y are within map limits
 	// and the tile is walkable (tile id 0 in the navigation layer)
-	return true;
+
+	p2List_item<MapLayer*>* item;
+
+	if (x >= 0 && x < data.width && y >= 0 && y <= data.height)
+	{
+		for (item = data.layers.start; item; item = item->next)
+		{
+			if (item->data->name == "Colisions")
+			{
+				LOG("id=%d", item->data->data[item->data->Get(x, y)]);
+				if (item->data->data[item->data->Get(x, y)] != 0)
+				{
+					return true;
+				}
+			}
+		}
+	}
+	
+	return false;
 }
 
 void j1Map::Draw()
