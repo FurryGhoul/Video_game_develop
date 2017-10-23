@@ -3,6 +3,7 @@
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Textures.h"
+#include "j1Input.h"
 #include "j1Map.h"
 #include <math.h>
 
@@ -71,34 +72,47 @@ void j1Map::PropagateDijkstra()
 	// on each cell (is already reset to 0 automatically)
 
 	iPoint curr;
-	iPoint start = { 19,4 };
-	uint priority = 0;
+	int x, y;
+	App->input->GetMousePosition(x, y);
 
-	if (frontier.Count()!=0 && frontier.Pop(curr))
+	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
+
+	while (frontier.Count()!=0)
 	{
-		iPoint neighbors[4];
-		neighbors[0].create(curr.x + 1, curr.y + 0);
-		neighbors[1].create(curr.x + 0, curr.y + 1);
-		neighbors[2].create(curr.x - 1, curr.y + 0);
-		neighbors[3].create(curr.x + 0, curr.y - 1);
-
-		for (uint i = 0; i < 4; ++i)
+		if (curr == map_coordinates)
 		{
+			break;
+		}
 
-			uint new_cost = cost_so_far[curr.x][curr.y] + MovementCost(neighbors[i].x, neighbors[i].y);			//nou cost del node
+		if (frontier.Pop(curr))
+		{
+			iPoint neighbors[4];
+			neighbors[0].create(curr.x + 1, curr.y + 0);
+			neighbors[1].create(curr.x + 0, curr.y + 1);
+			neighbors[2].create(curr.x - 1, curr.y + 0);
+			neighbors[3].create(curr.x + 0, curr.y - 1);
 
-			if (MovementCost(neighbors[i].x, neighbors[i].y) >= 0)
+			for (uint i = 0; i < 4; ++i)
 			{
-				if (visited.find(neighbors[i]) == -1 || new_cost<MovementCost(neighbors[i].x, neighbors[i].y))
+
+				uint new_cost = cost_so_far[curr.x][curr.y] + MovementCost(neighbors[i].x, neighbors[i].y);			//nou cost del node
+
+				if (MovementCost(neighbors[i].x, neighbors[i].y) >= 0)
 				{
-					cost_so_far[neighbors[i].x][neighbors[i].y] = new_cost;										//apliquem el nou cost del node a la llista de costos
-					frontier.Push(neighbors[i], new_cost);														//el nou cost es la prioritat
-					visited.add(neighbors[i]);
-					breadcrumbs.add(curr);
+					if (visited.find(neighbors[i]) == -1 || new_cost<MovementCost(neighbors[i].x, neighbors[i].y))
+					{
+						cost_so_far[neighbors[i].x][neighbors[i].y] = new_cost;										//apliquem el nou cost del node a la llista de costos
+						frontier.Push(neighbors[i], new_cost);														//el nou cost es la prioritat
+						visited.add(neighbors[i]);
+						breadcrumbs.add(curr);
+					}
 				}
 			}
 		}
+		
+
 	}
+	
 }
 
 int j1Map::MovementCost(int x, int y) const
