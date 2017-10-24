@@ -56,8 +56,9 @@ void j1Map::Path(int x, int y)
 	p2List_item<iPoint>* item;
 
 	item = breadcrumbs.end;
+	path.PushBack(curr);
 
-	while (item != breadcrumbs.start && visited.find(curr)!=-1)
+	while(item != breadcrumbs.start && visited.find(curr)!=-1)
 	{
 		curr = breadcrumbs[visited.find(curr)];
 		path.PushBack(curr);
@@ -72,18 +73,51 @@ void j1Map::PropagateDijkstra()
 	// on each cell (is already reset to 0 automatically)
 
 	iPoint curr;
+
+	if (frontier.Count()!=0)
+	{
+		if (frontier.Pop(curr))
+		{
+			iPoint neighbors[4];
+			neighbors[0].create(curr.x + 1, curr.y + 0);
+			neighbors[1].create(curr.x + 0, curr.y + 1);
+			neighbors[2].create(curr.x - 1, curr.y + 0);
+			neighbors[3].create(curr.x + 0, curr.y - 1);
+
+			for (uint i = 0; i < 4; ++i)
+			{
+
+				uint new_cost = cost_so_far[curr.x][curr.y] + MovementCost(neighbors[i].x, neighbors[i].y);			//nou cost del node
+
+				if (MovementCost(neighbors[i].x, neighbors[i].y) >= 0)
+				{
+					if (visited.find(neighbors[i]) == -1 || new_cost<cost_so_far[neighbors[i].x][neighbors[i].y])
+					{
+						cost_so_far[neighbors[i].x][neighbors[i].y] = new_cost;										//apliquem el nou cost del node a la llista de costos
+						frontier.Push(neighbors[i], new_cost);														//el nou cost es la prioritat
+						visited.add(neighbors[i]);
+						breadcrumbs.add(curr);
+					}
+				}
+			}
+		}
+	}
+}
+
+void j1Map::PointDijkstra()
+{
+	iPoint curr;
 	int x, y;
 	App->input->GetMousePosition(x, y);
 
 	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
 
-	while (frontier.Count()!=0)
+	while (frontier.Count() != 0)
 	{
 		if (curr == map_coordinates)
 		{
 			break;
 		}
-
 		if (frontier.Pop(curr))
 		{
 			iPoint neighbors[4];
@@ -109,12 +143,8 @@ void j1Map::PropagateDijkstra()
 				}
 			}
 		}
-		
-
 	}
-	
 }
-
 int j1Map::MovementCost(int x, int y) const
 {
 	int ret = -1;
