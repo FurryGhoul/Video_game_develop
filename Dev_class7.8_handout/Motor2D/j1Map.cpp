@@ -110,11 +110,11 @@ void j1Map::PointDijkstra()
 	int x, y;
 	App->input->GetMousePosition(x, y);
 
-	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
+	iPoint Goal = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
 
 	while (frontier.Count() != 0)
 	{
-		if (curr == map_coordinates)
+		if (curr == Goal)
 		{
 			break;
 		}
@@ -145,6 +145,48 @@ void j1Map::PointDijkstra()
 		}
 	}
 }
+
+void j1Map::PropagateAStar()
+{
+	iPoint curr;
+	int x, y;
+	App->input->GetMousePosition(x, y);
+
+	iPoint goal = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
+
+	while (frontier.Count() != 0)
+	{
+		if (curr == goal)
+		{
+			break;
+		}
+		if (frontier.Pop(curr))
+		{
+			iPoint neighbors[4];
+			neighbors[0].create(curr.x + 1, curr.y + 0);
+			neighbors[1].create(curr.x + 0, curr.y + 1);
+			neighbors[2].create(curr.x - 1, curr.y + 0);
+			neighbors[3].create(curr.x + 0, curr.y - 1);
+
+			for (uint i = 0; i < 4; ++i)
+			{
+				uint Distance = cost_so_far[curr.x][curr.y]+sqrt(pow((goal.x-curr.x),2)+pow((goal.y-curr.y),2));
+
+				if (MovementCost(neighbors[i].x, neighbors[i].y) >= 0)
+				{
+					if (visited.find(neighbors[i]) == -1)
+					{
+						cost_so_far[neighbors[i].x][neighbors[i].y] = Distance;
+						frontier.Push(neighbors[i], Distance);							//El nou cost es la distancia
+						visited.add(neighbors[i]);
+						breadcrumbs.add(curr);
+					}
+				}
+			}
+		}
+	}
+}
+
 int j1Map::MovementCost(int x, int y) const
 {
 	int ret = -1;
