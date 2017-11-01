@@ -8,6 +8,7 @@
 #include "PugiXml\src\pugixml.hpp"
 
 // Modules
+class j1PerfTimer;
 class j1Window;
 class j1Input;
 class j1Render;
@@ -81,6 +82,7 @@ private:
 public:
 
 	// Modules
+	j1PerfTimer*		timer = NULL;
 	j1Window*			win = NULL;
 	j1Input*			input = NULL;
 	j1Render*			render = NULL;
