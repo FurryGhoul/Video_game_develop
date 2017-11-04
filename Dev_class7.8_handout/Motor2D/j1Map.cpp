@@ -170,7 +170,8 @@ void j1Map::PropagateAStar()
 
 			for (uint i = 0; i < 4; ++i)
 			{
-				uint Distance = sqrt(pow((goal.x-neighbors[i].x),2)+pow((goal.y- neighbors[i].y),2));
+				//uint Distance = sqrt(pow((goal.x-neighbors[i].x),2)+pow((goal.y- neighbors[i].y),2));
+				uint Distance = neighbors[i].DistanceTo(goal);
 
 				if (MovementCost(neighbors[i].x, neighbors[i].y) >= 0)
 				{
