@@ -117,9 +117,6 @@ PathNode::PathNode(const PathNode& node) : g(node.g), h(node.h), pos(node.pos), 
 // ----------------------------------------------------------------------------------
 uint PathNode::FindWalkableAdjacents(PathList& list_to_fill) const
 {
-	iPoint cell;
-	uint before = list_to_fill.list.count();
-
 	// north
 	PathNode neighbor_1(-1, -1, { pos.x,pos.y + 1 }, this);
 	if(App->pathfinding->IsWalkable(neighbor_1.pos))
@@ -191,13 +188,12 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 
 		if (aux->data.pos == destination)
 		{
-			const PathNode* curr = &close.list.end->data;
-			while (curr->parent!=nullptr)
+			last_path.PushBack(aux->data.pos);
+			while (aux != nullptr)
 			{
-				last_path.PushBack(curr->pos);
-				curr = curr->parent;
+				last_path.PushBack(aux->data.parent->pos);
+				aux = aux->prev;
 			}
-			last_path.PushBack(curr->pos);
 			last_path.Flip();
 			break;
 		}
@@ -215,8 +211,10 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				{
 					if (open.Find(adjacent.list[i].pos)->data.g > adjacent.list[i].g)
 					{
-						p2List_item<PathNode>* item = open.Find(adjacent.list[i].pos);
-						item->data.parent = adjacent.list[i].parent;
+						/*p2List_item<PathNode>* item = open.Find(adjacent.list[i].pos);
+						item->data.parent = adjacent.list[i].parent;*/
+						open.list.del(open.Find(adjacent.list[i].pos));
+						open.list.add(adjacent.list[i]);
 					}
 				}
 				else
@@ -225,35 +223,7 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				}
 			}
 		}
-	}
-
-
-
-	// Add the origin tile to open
-
-
-	// Iterate while we have tile in the open list
-	
-		// TODO 3: Move the lowest score cell from open list to the closed list
-	
-
-		// TODO 4: If we just added the destination, we are done!
-		
-			// Backtrack to create the final path
-			// Use the Pathnode::parent and 
-			
-			
-			//Flip() the path when you are finish
-		
-		// TODO 5: Fill a list of all adjancent nodes
-	
-		
-		// TODO 6: Iterate adjancent nodes:
-		// ignore nodes in the closed list
-		// If it is NOT found, calculate its F and add it to the open list
-		// If it is already in the open list, check if it is a better path (compare G)
-		// If it is a better path, Update the parent
-	
+	}	
 
 	return ret;
 }
