@@ -188,11 +188,10 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 
 		if (aux->data.pos == destination)
 		{
-			last_path.PushBack(aux->data.pos);
-			while (aux != nullptr)
+			last_path.PushBack(destination);
+			for (uint i = close.list.count()-1; i >0; i--)
 			{
-				last_path.PushBack(aux->data.parent->pos);
-				aux = aux->prev;
+				last_path.PushBack(close.list[i].parent->pos);
 			}
 			last_path.Flip();
 			break;
