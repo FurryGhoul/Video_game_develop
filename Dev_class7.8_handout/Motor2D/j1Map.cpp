@@ -154,7 +154,7 @@ void j1Map::PropagateAStar()
 
 	iPoint goal = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
 
-	while (frontier.Count() != 0)
+	while (frontier.Count() != 0 && MovementCost(curr.x, curr.y) != 0)
 	{
 		if (curr == goal)
 		{
@@ -173,7 +173,7 @@ void j1Map::PropagateAStar()
 				//uint Distance = sqrt(pow((goal.x-neighbors[i].x),2)+pow((goal.y- neighbors[i].y),2));
 				uint Distance = neighbors[i].DistanceTo(goal);
 
-				if (MovementCost(neighbors[i].x, neighbors[i].y) >= 0)
+				if (MovementCost(neighbors[i].x, neighbors[i].y) > 0)
 				{
 					if (breadcrumbs.find(neighbors[i]) == -1 && visited.find(neighbors[i]) == -1)
 					{

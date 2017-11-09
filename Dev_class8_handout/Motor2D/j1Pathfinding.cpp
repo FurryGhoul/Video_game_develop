@@ -188,10 +188,13 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 
 		if (aux->data.pos == destination)
 		{
-			last_path.PushBack(destination);
-			for (uint i = close.list.count()-1; i >0; i--)
+			const PathNode* curr = &close.list.end->data;
+			last_path.PushBack(aux->data.pos);
+
+			while ( curr != nullptr )
 			{
-				last_path.PushBack(close.list[i].parent->pos);
+				last_path.PushBack(curr->parent->pos);
+				curr = curr->parent;
 			}
 			last_path.Flip();
 			break;
@@ -208,12 +211,12 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 
 				if (open.Find(adjacent.list[i].pos) != NULL)
 				{
-					if (open.Find(adjacent.list[i].pos)->data.g > adjacent.list[i].g)
+					if (open.Find(adjacent.list[i].pos)->data.g >= adjacent.list[i].g)
 					{
-						/*p2List_item<PathNode>* item = open.Find(adjacent.list[i].pos);
-						item->data.parent = adjacent.list[i].parent;*/
-						open.list.del(open.Find(adjacent.list[i].pos));
-						open.list.add(adjacent.list[i]);
+						p2List_item<PathNode>* item = open.Find(adjacent.list[i].pos);
+						item->data.parent = adjacent.list[i].parent;
+						/*open.list.del(open.Find(adjacent.list[i].pos));
+						open.list.add(adjacent.list[i]);*/
 					}
 				}
 				else
