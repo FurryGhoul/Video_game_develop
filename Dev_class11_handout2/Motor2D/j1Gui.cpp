@@ -7,6 +7,7 @@
 #include "j1Input.h"
 #include "j1Gui.h"
 #include "UIElements.h"
+#include "UIText.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -80,7 +81,16 @@ const SDL_Texture* j1Gui::GetAtlas() const
 void j1Gui::AddElement(int x, int y, UIElementType type)
 {
 	UIElements* element_created;
-	element_created = new UIElements(x, y, type);
+	switch (type)
+	{
+	case TEXT:
+		element_created = new UIText(x, y, type);
+		break;
+	case IMAGE:
+		break;
+	default:
+		break;
+	}
 
 	elements.add(element_created);
 }

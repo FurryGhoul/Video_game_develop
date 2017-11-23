@@ -9,6 +9,7 @@
 #include "j1Map.h"
 #include "j1PathFinding.h"
 #include "j1Gui.h"
+#include "UIElements.h"
 #include "j1Scene.h"
 
 j1Scene::j1Scene() : j1Module()
