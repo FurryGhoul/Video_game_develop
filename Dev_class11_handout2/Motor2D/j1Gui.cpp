@@ -8,6 +8,7 @@
 #include "j1Gui.h"
 #include "UIElements.h"
 #include "UIText.h"
+#include "UIImage.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -43,7 +44,7 @@ bool j1Gui::PreUpdate()
 	return true;
 }
 
-bool j1Gui::Update(float dt)
+bool j1Gui::PostUpdate()
 {
 	p2List_item<UIElements*>* element=elements.start;
 
@@ -57,10 +58,7 @@ bool j1Gui::Update(float dt)
 }
 
 // Called after all Updates
-bool j1Gui::PostUpdate()
-{
-	return true;
-}
+
 
 // Called before quitting
 bool j1Gui::CleanUp()
@@ -71,27 +69,25 @@ bool j1Gui::CleanUp()
 }
 
 // const getter for atlas
-const SDL_Texture* j1Gui::GetAtlas() const
+SDL_Texture* j1Gui::GetAtlas() const
 {
 	return atlas;
 }
 
 // class Gui ---------------------------------------------------
 
-void j1Gui::AddElement(int x, int y, UIElementType type)
+void j1Gui::AddElementText(int x, int y, UIElementType type, const char* text)
 {
 	UIElements* element_created;
-	switch (type)
-	{
-	case TEXT:
-		element_created = new UIText(x, y, type);
-		break;
-	case IMAGE:
-		break;
-	default:
-		break;
-	}
+	element_created = new UIText(x, y, type,text);
+	elements.add(element_created);
 
+}
+
+void j1Gui::AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect)
+{
+	UIElements* element_created;
+	element_created = new UIImage(x, y, type, rect);
 	elements.add(element_created);
 }
 

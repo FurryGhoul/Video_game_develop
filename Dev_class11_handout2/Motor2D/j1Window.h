@@ -33,13 +33,13 @@ public:
 public:
 	//The window we'll be rendering to
 	SDL_Window* window;
+	uint		width;
 
 	//The surface contained by the window
 	SDL_Surface* screen_surface;
 
 private:
 	p2SString	title;
-	uint		width;
 	uint		height;
 	uint		scale;
 };

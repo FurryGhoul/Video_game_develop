@@ -9,6 +9,7 @@
 #define CURSOR_WIDTH 2
 
 class SDL_Texture;
+class SDL_Rect;
 class UIElements;
 enum UIElementType;
 
@@ -34,7 +35,7 @@ public:
 	// Called before all Updates
 	bool PreUpdate();
 
-	bool Update(float dt);
+	//bool Update(float dt);
 
 	// Called after all Updates
 	bool PostUpdate();
@@ -45,11 +46,12 @@ public:
 	// TODO 2: Create the factory methods
 	// Gui creation functions
 
-	void AddElement(int x, int y, UIElementType type);
+	void AddElementText(int x, int y, UIElementType type, const char* text=nullptr);
+	void AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect);
 	void DeleteElements(UIElements* element);
 
 
-	const SDL_Texture* GetAtlas() const;
+	SDL_Texture* GetAtlas() const;
 
 public:
 

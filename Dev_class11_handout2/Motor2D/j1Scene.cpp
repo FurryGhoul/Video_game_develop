@@ -33,6 +33,10 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {
+	SDL_Rect*rect = new SDL_Rect({ 485, 829, 328, 103 });
+	App->gui->AddElementText(App->win->width/2, 25, TEXT,"Hello World");
+	App->gui->AddElementImage(App->win->width / 2, 100, IMAGE,rect);
+
 	if(App->map->Load("iso_walk.tmx") == true)
 	{
 		int w, h;
@@ -44,9 +48,6 @@ bool j1Scene::Start()
 	}
 
 	debug_tex = App->tex->Load("maps/path2.png");
-	App->gui->AddElement(0, 0, TEXT);
-
-	// TODO 3: Create the banner (rect {485, 829, 328, 103}) and the text "Hello World"
 
 	return true;
 }

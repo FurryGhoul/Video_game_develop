@@ -9,7 +9,8 @@ class SDL_Texture;
 class UIText:public UIElements
 {
 public:
-	UIText(int x, int y, UIElementType type);
+
+	UIText(int x, int y, UIElementType type, const char* text);
 	~UIText();
 
 	void Draw();
@@ -17,6 +18,8 @@ public:
 public:
 
 	SDL_Texture*	texture;
+	uint text_width;
+	uint text_height;
 	const char*		string;
 	
 };
