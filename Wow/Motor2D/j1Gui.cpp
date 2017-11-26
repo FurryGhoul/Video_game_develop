@@ -7,6 +7,7 @@
 #include "j1Input.h"
 #include "j1Gui.h"
 #include "UIElements.h"
+#include "UIBackground.h"
 #include "UIText.h"
 #include "UIImage.h"
 
@@ -34,6 +35,10 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
+
+	background = App->tex->Load("gui/login_background.png");
+
+	fonts.PushBack(App->font->Load("fonts\wow\MORPHEUS.ttf"));
 
 	return true;
 }
@@ -74,7 +79,19 @@ SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
+SDL_Texture* j1Gui::GetBackground() const
+{
+	return background;
+}
+
 // class Gui ---------------------------------------------------
+
+void j1Gui::AddBackground(int x, int y, UIElementType type)
+{
+	UIElements* element_created;
+	element_created = new UIBackground(x, y, type);
+	elements.add(element_created);
+}
 
 void j1Gui::AddElementText(int x, int y, UIElementType type, const char* text)
 {

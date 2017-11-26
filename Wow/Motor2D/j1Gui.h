@@ -4,6 +4,7 @@
 #include "p2List.h"
 #include "p2Log.h"
 #include "j1Module.h"
+#include "p2DynArray.h"
 
 
 #define CURSOR_WIDTH 2
@@ -12,6 +13,7 @@ class SDL_Texture;
 class SDL_Rect;
 class UIElements;
 enum UIElementType;
+class _TTF_Font;
 
 // TODO 1: Create your structure of classes
 
@@ -46,16 +48,20 @@ public:
 	// TODO 2: Create the factory methods
 	// Gui creation functions
 
+	void AddBackground(int x, int y, UIElementType type);
 	void AddElementText(int x, int y, UIElementType type, const char* text=nullptr);
 	void AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect);
 	void DeleteElements(UIElements* element);
 
 
 	SDL_Texture* GetAtlas() const;
+	SDL_Texture* GetBackground() const;
 
 public:
 
 	p2List<UIElements*> elements;
+	SDL_Texture* background;
+	p2DynArray<_TTF_Font*> fonts;
 	
 private:
 

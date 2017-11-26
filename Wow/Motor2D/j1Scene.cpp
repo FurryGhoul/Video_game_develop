@@ -34,8 +34,9 @@ bool j1Scene::Awake()
 bool j1Scene::Start()
 {
 	SDL_Rect*rect = new SDL_Rect({ 485, 829, 328, 103 });
-	App->gui->AddElementText(App->win->width/2, 25, TEXT,"Hello World");
-	App->gui->AddElementImage(App->win->width / 2, 100, IMAGE,rect);
+	App->gui->AddBackground(0, 0, BACKGROUND);
+	App->gui->AddElementText(100, 100, TEXT,"Hola");
+	
 
 	if(App->map->Load("iso_walk.tmx") == true)
 	{

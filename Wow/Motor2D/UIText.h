@@ -5,6 +5,7 @@
 #include "UIElements.h"
 
 class SDL_Texture;
+class _TTF_Font;
 
 class UIText:public UIElements
 {
@@ -18,9 +19,10 @@ public:
 public:
 
 	SDL_Texture*	texture;
-	uint text_width;
-	uint text_height;
+	uint			text_width;
+	uint			text_height;
 	const char*		string;
+	_TTF_Font*      textFont;
 	
 };
 

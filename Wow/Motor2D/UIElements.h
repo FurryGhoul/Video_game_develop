@@ -6,6 +6,7 @@
 
 enum UIElementType
 {
+	BACKGROUND,
 	TEXT,
 	IMAGE
 };
