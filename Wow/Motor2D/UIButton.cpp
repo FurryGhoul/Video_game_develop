@@ -1,4 +1,5 @@
 #include "j1App.h"
+#include "j1Input.h"
 #include "j1Render.h"
 #include "j1Textures.h"
 #include "j1Fonts.h"
@@ -31,14 +32,39 @@ void UIButton::Draw()
 {
 	if (btype == BUTTON_1)
 	{
-		App->render->Blit(ButtonTex, position.x - App->render->camera.x - size_x / 2, position.y - App->render->camera.y - size_y / 2,2.0f);
-		App->render->Blit(ButtonText, position.x - App->render->camera.x , position.y - App->render->camera.y);
-
+		App->render->Blit(ButtonTex, position.x - App->render->camera.x - size_x, position.y - App->render->camera.y - size_y / 2,2.0f);
+		App->render->Blit(ButtonText, position.x - App->render->camera.x-size_x/2 , position.y - App->render->camera.y);
 	}
+
+	Iluminate();
 
 }
 
 bool UIButton::Iluminate()
 {
-	return true;
+	bool ret = false;
+	int x, y;
+	
+	App->input->GetMousePosition(x, y);
+	
+	int limit_xl = position.x - App->render->camera.x - (size_x / 2)*2;
+	int limit_xr = position.x - App->render->camera.x + (size_x / 2)*2;
+	int limit_yu = position.y - App->render->camera.y - (size_y / 2 )* 2;
+	int limit_yd = position.y - App->render->camera.y + (size_y / 2) * 2;
+
+
+	if (x>limit_xl && x<limit_xr)
+	{
+		if (y > limit_yu && y < limit_yd)
+		{
+			LOG("siiii");
+			ret = true;
+		}
+		
+	}
+	else
+	{
+		LOG("nooooo");
+	}
+	return ret;
 }
