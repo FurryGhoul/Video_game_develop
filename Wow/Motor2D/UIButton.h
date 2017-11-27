@@ -21,7 +21,6 @@ public:
 
 	void Draw();
 	bool Iluminate();
-	void DoAcction();
 
 private:
 
@@ -29,6 +28,9 @@ private:
 	ButtonType btype;
 	SDL_Texture* ButtonTex;
 	SDL_Texture* ButtonText;
+
+	uint sizeTx;
+	uint sizeTy;
 
 };
 

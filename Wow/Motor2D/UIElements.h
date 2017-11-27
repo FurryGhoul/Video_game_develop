@@ -9,7 +9,8 @@ enum UIElementType
 	BACKGROUND,
 	TEXT,
 	IMAGE,
-	BUTTON
+	BUTTON,
+	TEXTBOX,
 };
 
 class UIElements:public j1Gui
@@ -28,6 +29,8 @@ public:
 
 	uint size_x;
 	uint size_y;
+
+	float scale;
 
 };
 

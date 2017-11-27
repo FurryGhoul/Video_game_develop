@@ -37,9 +37,23 @@ bool j1Scene::Start()
 	App->gui->AddBackground(0, 0, BACKGROUND);
 
 	App->gui->AddElementText(996, 570, TEXT,"Account Name");
-	App->gui->AddElementText(996, 700, TEXT, "Account Password");
+	App->gui->AddElementTextBox(996, 600, TEXTBOX, "mail");
 
-	App->gui->AddElementButton(996, 850, BUTTON, BUTTON_1, "Login");
+	App->gui->AddElementText(996, 700, TEXT, "Account Password");
+	App->gui->AddElementTextBox(996, 725, TEXTBOX, "pasword");
+
+	App->gui->AddElementText(153, 1000, TEXT, "Version 2.0.12 (6546)(Release)");
+	App->gui->AddElementText(65, 1025, TEXT, "Mar 30 2007");
+	App->gui->AddElementText(1920/2, 1050, TEXT, "Copyright 2004-2007 Blizzard Entertainment. All Rights Reserved.");
+
+	App->gui->AddElementButton(996, 820, BUTTON, BUTTON_1, "Login");
+	App->gui->AddElementButton(100, 850, BUTTON, BUTTON_1, "Manage Account");
+	App->gui->AddElementButton(100, 900, BUTTON, BUTTON_1, "Community Site");
+
+	App->gui->AddElementButton(1800, 750, BUTTON, BUTTON_1, "Cinematics");
+	App->gui->AddElementButton(1800, 800, BUTTON, BUTTON_1, "Credits");
+	App->gui->AddElementButton(1800, 850, BUTTON, BUTTON_1, "Terms of Use");
+	App->gui->AddElementButton(1800, 1000, BUTTON, BUTTON_1, "Quit");
 	
 
 	if(App->map->Load("iso_walk.tmx") == true)

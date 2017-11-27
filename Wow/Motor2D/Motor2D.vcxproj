@@ -97,6 +97,7 @@
     <ClCompile Include="UIElements.cpp" />
     <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="UIText.cpp" />
+    <ClCompile Include="UITextBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Fonts.h" />
@@ -126,6 +127,7 @@
     <ClInclude Include="UIElements.h" />
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="UIText.h" />
+    <ClInclude Include="UITextBox.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

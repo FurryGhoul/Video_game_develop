@@ -13,7 +13,8 @@ UIButton::UIButton(int x, int y, UIElementType type, ButtonType buttontype, cons
 	if (text != nullptr)
 	{
 		buttontext = text;
-		ButtonText=App->font->Print(buttontext, { 255, 255, 0 }, App->gui->fonts[0]);
+		ButtonText=App->font->Print(buttontext, { 255, 255, 0 }, App->gui->fonts[1]);
+		App->tex->GetSize(ButtonText, sizeTx, sizeTy);
 	}
 	
 	btype = buttontype;
@@ -33,11 +34,11 @@ void UIButton::Draw()
 	if (btype == BUTTON_1)
 	{
 		App->render->Blit(ButtonTex, position.x - App->render->camera.x - size_x, position.y - App->render->camera.y - size_y / 2,2.0f);
-		App->render->Blit(ButtonText, position.x - App->render->camera.x-size_x/2 , position.y - App->render->camera.y);
+		App->render->Blit(ButtonText, position.x - App->render->camera.x- sizeTx /2 , position.y - App->render->camera.y);
 		
 		if (Iluminate() == true)
 		{
-			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - size_x, position.y - App->render->camera.y - size_y / 2, 2.0f);
+			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - size_x-12, position.y - App->render->camera.y - size_y / 2-12, 2.0f);
 		}
 	}
 

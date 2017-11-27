@@ -51,6 +51,7 @@ public:
 
 	void AddBackground(int x, int y, UIElementType type);
 	void AddElementText(int x, int y, UIElementType type, const char* text=nullptr);
+	void AddElementTextBox(int x, int y, UIElementType type, const char* text = nullptr);
 	void AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect);
 	void AddElementButton(int x, int y, UIElementType type, ButtonType btype, const char* text = nullptr);
 	void DeleteElements(UIElements* element);
@@ -62,7 +63,8 @@ public:
 public:
 
 	p2List<UIElements*> elements;
-	SDL_Texture* background;
+	SDL_Texture* background=nullptr;
+	SDL_Texture* textbox = nullptr;
 	p2DynArray<_TTF_Font*> fonts;
 	p2DynArray<SDL_Texture*> buttons;
 	

@@ -11,6 +11,7 @@
 #include "UIText.h"
 #include "UIImage.h"
 #include "UIButton.h"
+#include "UITextBox.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -40,9 +41,11 @@ bool j1Gui::Start()
 	background = App->tex->Load("gui/login_background.png");
 
 	fonts.PushBack(App->font->Load("fonts/wow/ARIALN.ttf",30));
+	fonts.PushBack(App->font->Load("fonts/wow/ARIALN.ttf", 20));
 
 	buttons.PushBack(App->tex->Load("gui/UIButton.png"));
 	buttons.PushBack(App->tex->Load("gui/UIButton_light.png"));
+	textbox=App->tex->Load("gui/UITextBox.png");
 
 	return true;
 }
@@ -116,6 +119,13 @@ void j1Gui::AddElementButton(int x, int y, UIElementType type, ButtonType btype,
 {
 	UIElements* element_created;
 	element_created = new UIButton(x, y, type, btype, text);
+	elements.add(element_created);
+}
+
+void j1Gui::AddElementTextBox(int x, int y, UIElementType type, const char* text)
+{
+	UIElements* element_created;
+	element_created = new UITextBox(x, y, type, text);
 	elements.add(element_created);
 }
 
