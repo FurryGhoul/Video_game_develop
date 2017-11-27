@@ -42,6 +42,7 @@ bool j1Gui::Start()
 	fonts.PushBack(App->font->Load("fonts/wow/ARIALN.ttf",30));
 
 	buttons.PushBack(App->tex->Load("gui/UIButton.png"));
+	buttons.PushBack(App->tex->Load("gui/UIButton_light.png"));
 
 	return true;
 }

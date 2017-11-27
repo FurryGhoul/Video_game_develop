@@ -34,6 +34,11 @@ void UIButton::Draw()
 	{
 		App->render->Blit(ButtonTex, position.x - App->render->camera.x - size_x, position.y - App->render->camera.y - size_y / 2,2.0f);
 		App->render->Blit(ButtonText, position.x - App->render->camera.x-size_x/2 , position.y - App->render->camera.y);
+		
+		if (Iluminate() == true)
+		{
+			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - size_x, position.y - App->render->camera.y - size_y / 2, 2.0f);
+		}
 	}
 
 	Iluminate();
@@ -57,14 +62,9 @@ bool UIButton::Iluminate()
 	{
 		if (y > limit_yu && y < limit_yd)
 		{
-			LOG("siiii");
 			ret = true;
 		}
-		
 	}
-	else
-	{
-		LOG("nooooo");
-	}
+	
 	return ret;
 }
