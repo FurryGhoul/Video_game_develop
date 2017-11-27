@@ -18,6 +18,6 @@ UIImage::~UIImage()
 
 void UIImage::Draw()
 {
-	App->render->Blit(App->gui->GetAtlas(), position.x-App->render->camera.x-rectangle->w/2, position.y - App->render->camera.y-rectangle->h/2, rectangle);
+	App->render->Blit(App->gui->GetAtlas(), position.x-App->render->camera.x-rectangle->w/2, position.y - App->render->camera.y-rectangle->h/2, 1.0f, rectangle);
 	LOG("holi");
 }

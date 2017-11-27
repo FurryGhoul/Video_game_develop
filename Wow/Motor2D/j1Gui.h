@@ -13,6 +13,7 @@ class SDL_Texture;
 class SDL_Rect;
 class UIElements;
 enum UIElementType;
+enum ButtonType;
 class _TTF_Font;
 
 // TODO 1: Create your structure of classes
@@ -51,6 +52,7 @@ public:
 	void AddBackground(int x, int y, UIElementType type);
 	void AddElementText(int x, int y, UIElementType type, const char* text=nullptr);
 	void AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect);
+	void AddElementButton(int x, int y, UIElementType type, ButtonType btype, const char* text = nullptr);
 	void DeleteElements(UIElements* element);
 
 
@@ -62,10 +64,11 @@ public:
 	p2List<UIElements*> elements;
 	SDL_Texture* background;
 	p2DynArray<_TTF_Font*> fonts;
+	p2DynArray<SDL_Texture*> buttons;
 	
 private:
 
-	SDL_Texture* atlas;
+	SDL_Texture* atlas=nullptr;
 	p2SString atlas_file_name;
 };
 

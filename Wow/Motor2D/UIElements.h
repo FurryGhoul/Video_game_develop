@@ -8,7 +8,8 @@ enum UIElementType
 {
 	BACKGROUND,
 	TEXT,
-	IMAGE
+	IMAGE,
+	BUTTON
 };
 
 class UIElements:public j1Gui
@@ -24,6 +25,9 @@ public:
 
 	fPoint position;
 	UIElementType type;
+
+	uint size_x;
+	uint size_y;
 
 };
 

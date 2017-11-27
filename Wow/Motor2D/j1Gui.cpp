@@ -10,6 +10,7 @@
 #include "UIBackground.h"
 #include "UIText.h"
 #include "UIImage.h"
+#include "UIButton.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -38,7 +39,9 @@ bool j1Gui::Start()
 
 	background = App->tex->Load("gui/login_background.png");
 
-	fonts.PushBack(App->font->Load("fonts\wow\MORPHEUS.ttf"));
+	fonts.PushBack(App->font->Load("fonts/wow/ARIALN.ttf",30));
+
+	buttons.PushBack(App->tex->Load("gui/UIButton.png"));
 
 	return true;
 }
@@ -105,6 +108,13 @@ void j1Gui::AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect)
 {
 	UIElements* element_created;
 	element_created = new UIImage(x, y, type, rect);
+	elements.add(element_created);
+}
+
+void j1Gui::AddElementButton(int x, int y, UIElementType type, ButtonType btype, const char* text)
+{
+	UIElements* element_created;
+	element_created = new UIButton(x, y, type, btype, text);
 	elements.add(element_created);
 }
 

@@ -10,6 +10,7 @@
 #include "j1PathFinding.h"
 #include "j1Gui.h"
 #include "UIElements.h"
+#include "UIButton.h"
 #include "j1Scene.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -32,10 +33,13 @@ bool j1Scene::Awake()
 
 // Called before the first frame
 bool j1Scene::Start()
-{
-	SDL_Rect*rect = new SDL_Rect({ 485, 829, 328, 103 });
+{	
 	App->gui->AddBackground(0, 0, BACKGROUND);
-	App->gui->AddElementText(100, 100, TEXT,"Hola");
+
+	App->gui->AddElementText(996, 570, TEXT,"Account Name");
+	App->gui->AddElementText(996, 700, TEXT, "Account Password");
+
+	App->gui->AddElementButton(996, 850, BUTTON, BUTTON_1, "Login");
 	
 
 	if(App->map->Load("iso_walk.tmx") == true)

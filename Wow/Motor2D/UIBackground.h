@@ -12,10 +12,6 @@ public:
 
 	void Draw();
 
-public:
-
-
-
 };
 
 #endif //__BACKGROUND_H__
