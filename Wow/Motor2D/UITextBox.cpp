@@ -69,8 +69,5 @@ void UITextBox::HideText()
 			hide = false;
 		}
 	}
-	
-
-	
 }
 

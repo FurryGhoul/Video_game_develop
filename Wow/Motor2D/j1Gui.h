@@ -16,9 +16,11 @@ enum UIElementType;
 enum ButtonType;
 class _TTF_Font;
 
-// TODO 1: Create your structure of classes
-
-// ---------------------------------------------------
+enum UIEvents
+{
+	MOUSE_ENTER,
+	MOUSE_LEAVE
+};
 
 class j1Gui : public j1Module
 {
@@ -45,6 +47,8 @@ public:
 
 	// Called before quitting
 	bool CleanUp();
+
+	bool GUIEvent() { return true; }
 
 	// TODO 2: Create the factory methods
 	// Gui creation functions

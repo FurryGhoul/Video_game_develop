@@ -72,6 +72,11 @@ public:
 		return true;
 	}
 
+	virtual bool GUIEvent()
+	{
+		return true;
+	}
+
 public:
 
 	p2SString	name;
