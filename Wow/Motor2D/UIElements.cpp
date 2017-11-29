@@ -5,7 +5,7 @@
 
 
 
-UIElements::UIElements(int x, int y, UIElementType type):position(x,y), type(type)
+UIElements::UIElements(int x, int y, UIElementType type, j1Module* modul):position(x,y), type(type),callback(modul)
 {
 
 }

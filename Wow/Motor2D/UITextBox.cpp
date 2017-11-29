@@ -8,7 +8,7 @@
 
 
 
-UITextBox::UITextBox(int x, int y, UIElementType type, const char* text): UIElements(x,y,type)
+UITextBox::UITextBox(int x, int y, UIElementType type, const char* text, j1Module* modul): UIElements(x,y,type,modul)
 {
 	if (text != nullptr)
 	{

@@ -93,39 +93,39 @@ SDL_Texture* j1Gui::GetBackground() const
 
 // class Gui ---------------------------------------------------
 
-void j1Gui::AddBackground(int x, int y, UIElementType type)
+void j1Gui::AddBackground(int x, int y, UIElementType type, j1Module* modul)
 {
 	UIElements* element_created;
-	element_created = new UIBackground(x, y, type);
+	element_created = new UIBackground(x, y, type, modul);
 	elements.add(element_created);
 }
 
-void j1Gui::AddElementText(int x, int y, UIElementType type, const char* text)
+void j1Gui::AddElementText(int x, int y, UIElementType type, j1Module* modul, const char* text)
 {
 	UIElements* element_created;
-	element_created = new UIText(x, y, type,text);
+	element_created = new UIText(x, y, type,text, modul);
 	elements.add(element_created);
 
 }
 
-void j1Gui::AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect)
+void j1Gui::AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect, j1Module* modul)
 {
 	UIElements* element_created;
-	element_created = new UIImage(x, y, type, rect);
+	element_created = new UIImage(x, y, type, rect, modul);
 	elements.add(element_created);
 }
 
-void j1Gui::AddElementButton(int x, int y, UIElementType type, ButtonType btype, const char* text)
+void j1Gui::AddElementButton(int x, int y, UIElementType type, ButtonType btype, j1Module* modul, const char* text)
 {
 	UIElements* element_created;
-	element_created = new UIButton(x, y, type, btype, text);
+	element_created = new UIButton(x, y, type, btype, text, modul);
 	elements.add(element_created);
 }
 
-void j1Gui::AddElementTextBox(int x, int y, UIElementType type, const char* text)
+void j1Gui::AddElementTextBox(int x, int y, UIElementType type, j1Module* modul, const char* text)
 {
 	UIElements* element_created;
-	element_created = new UITextBox(x, y, type, text);
+	element_created = new UITextBox(x, y, type, text, modul);
 	elements.add(element_created);
 }
 

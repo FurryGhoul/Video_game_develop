@@ -3,6 +3,7 @@
 
 #include "j1Gui.h"
 #include "p2Point.h"
+#include "SDL\include\SDL_rect.h"
 
 enum UIElementType
 {
@@ -17,18 +18,20 @@ class UIElements:public j1Gui
 {
 public:
 	
-	UIElements(int x, int y, UIElementType type);
+	UIElements(int x, int y, UIElementType type, j1Module* modul);
 	~UIElements();
 
 	virtual void Draw() {};
 
 public:
 
-	fPoint position;
-	UIElementType type;
+	SDL_Rect		Elementrect;
+	fPoint			position;
+	UIElementType	type;
+	j1Module*		callback=nullptr;
 
-	uint size_x;
-	uint size_y;
+	uint			size_x;
+	uint			size_y;
 
 	float scale;
 

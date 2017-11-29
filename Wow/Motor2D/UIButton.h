@@ -16,7 +16,7 @@ class UIButton : public UIElements
 {
 public:
 
-	UIButton(int x, int y, UIElementType type, ButtonType buttontype, const char* text);
+	UIButton(int x, int y, UIElementType type, ButtonType buttontype, const char* text, j1Module* modul);
 	~UIButton();
 
 	void Draw();
@@ -25,9 +25,11 @@ public:
 private:
 
 	const char* buttontext=nullptr;
+
 	ButtonType btype;
-	SDL_Texture* ButtonTex;
-	SDL_Texture* ButtonText;
+
+	SDL_Texture*	ButtonTex;
+	SDL_Texture*	ButtonText;
 
 	uint sizeTx;
 	uint sizeTy;

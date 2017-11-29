@@ -19,7 +19,8 @@ class _TTF_Font;
 enum UIEvents
 {
 	MOUSE_ENTER,
-	MOUSE_LEAVE
+	MOUSE_LEAVE,
+	MOUSE_CLICK
 };
 
 class j1Gui : public j1Module
@@ -48,16 +49,16 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	bool GUIEvent() { return true; }
+	bool GUIEvent(UIEvents eventType, UIElements* element) { return true; }
 
 	// TODO 2: Create the factory methods
 	// Gui creation functions
 
-	void AddBackground(int x, int y, UIElementType type);
-	void AddElementText(int x, int y, UIElementType type, const char* text=nullptr);
-	void AddElementTextBox(int x, int y, UIElementType type, const char* text = nullptr);
-	void AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect);
-	void AddElementButton(int x, int y, UIElementType type, ButtonType btype, const char* text = nullptr);
+	void AddBackground(int x, int y, UIElementType type, j1Module* modul);
+	void AddElementText(int x, int y, UIElementType type, j1Module* modul, const char* text=nullptr);
+	void AddElementTextBox(int x, int y, UIElementType type, j1Module* modul, const char* text = nullptr);
+	void AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect, j1Module* modul);
+	void AddElementButton(int x, int y, UIElementType type, ButtonType btype, j1Module* modul, const char* text = nullptr);
 	void DeleteElements(UIElements* element);
 
 

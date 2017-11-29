@@ -10,7 +10,7 @@ class UIImage:public UIElements
 {
 public:
 	
-	UIImage(int x, int y, UIElementType type, SDL_Rect* rect);
+	UIImage(int x, int y, UIElementType type, SDL_Rect* rect, j1Module* modul);
 	~UIImage();
 
 	void Draw();

@@ -8,7 +8,7 @@
 
 
 
-UIButton::UIButton(int x, int y, UIElementType type, ButtonType buttontype, const char* text):UIElements(x,y,type)
+UIButton::UIButton(int x, int y, UIElementType type, ButtonType buttontype, const char* text, j1Module* modul):UIElements(x,y,type,modul)
 {
 	if (text != nullptr)
 	{
@@ -19,8 +19,17 @@ UIButton::UIButton(int x, int y, UIElementType type, ButtonType buttontype, cons
 	
 	btype = buttontype;
 	ButtonTex = App->gui->buttons[0];
+	scale = 2.0f;
 
 	App->tex->GetSize(ButtonTex, size_x, size_y);
+
+	int rect_x = position.x - (size_x / 2)*scale;
+	int rect_y = position.y;
+
+	
+
+	Elementrect = { rect_x,rect_y,(int)size_x*(int)scale,(int)size_y*(int)scale };
+	
 }
 
 
@@ -33,12 +42,13 @@ void UIButton::Draw()
 {
 	if (btype == BUTTON_1)
 	{
-		App->render->Blit(ButtonTex, position.x - App->render->camera.x - size_x, position.y - App->render->camera.y - size_y / 2,2.0f);
-		App->render->Blit(ButtonText, position.x - App->render->camera.x- sizeTx /2 , position.y - App->render->camera.y);
+		App->render->Blit(ButtonTex, position.x - App->render->camera.x - size_x, position.y - App->render->camera.y,2.0f);
+		App->render->Blit(ButtonText, position.x - App->render->camera.x- sizeTx /2 , position.y - App->render->camera.y+sizeTy/2);
+		App->render->DrawQuad(Elementrect, 255, 0, 255, 80);
 		
 		if (Iluminate() == true)
 		{
-			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - size_x-12, position.y - App->render->camera.y - size_y / 2-12, 2.0f);
+			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - size_x-12, position.y - App->render->camera.y-12, 2.0f);
 		}
 	}
 
@@ -53,15 +63,15 @@ bool UIButton::Iluminate()
 	
 	App->input->GetMousePosition(x, y);
 	
-	int limit_xl = position.x - App->render->camera.x - (size_x / 2)*2;
-	int limit_xr = position.x - App->render->camera.x + (size_x / 2)*2;
-	int limit_yu = position.y - App->render->camera.y - (size_y / 2 )* 2;
-	int limit_yd = position.y - App->render->camera.y + (size_y / 2) * 2;
+	int limit_xl = position.x - App->render->camera.x - (size_x / 2)*scale;
+	int limit_xr = position.x - App->render->camera.x + (size_x / 2)*scale;
+	int limit_yu = position.y - App->render->camera.y - (size_y)* 2;
+	int limit_yd = position.y - App->render->camera.y + (size_y) * 2;
 
 
-	if (x>limit_xl && x<limit_xr)
+	if (x>Elementrect.x && x<Elementrect.x+Elementrect.w)
 	{
-		if (y > limit_yu && y < limit_yd)
+		if (y > Elementrect.y && y <Elementrect.y+Elementrect.h)
 		{
 			ret = true;
 		}

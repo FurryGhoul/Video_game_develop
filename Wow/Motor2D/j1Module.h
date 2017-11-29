@@ -10,6 +10,9 @@
 #include "PugiXml\src\pugixml.hpp"
 
 class j1App;
+class UIElements;
+
+enum UIEvents;
 
 class j1Module
 {
@@ -72,7 +75,7 @@ public:
 		return true;
 	}
 
-	virtual bool GUIEvent()
+	virtual bool GUIEvent(UIEvents eventType, UIElements* element)
 	{
 		return true;
 	}

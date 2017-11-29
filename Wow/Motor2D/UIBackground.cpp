@@ -4,7 +4,7 @@
 #include "UIBackground.h"
 
 
-UIBackground::UIBackground(int x, int y, UIElementType type):UIElements(x,y,type)
+UIBackground::UIBackground(int x, int y, UIElementType type, j1Module* modul):UIElements(x,y,type,modul)
 {
 }
 

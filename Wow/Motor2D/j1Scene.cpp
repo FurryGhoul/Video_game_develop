@@ -34,26 +34,26 @@ bool j1Scene::Awake()
 // Called before the first frame
 bool j1Scene::Start()
 {	
-	App->gui->AddBackground(-100, 0, BACKGROUND);
+	App->gui->AddBackground(0, 0, BACKGROUND, this);
 
-	App->gui->AddElementText(896, 570, TEXT,"Account Name");
-	App->gui->AddElementTextBox(896, 600, TEXTBOX, "mail");
+	App->gui->AddElementText(896, 570, TEXT,this,"Account Name");
+	App->gui->AddElementTextBox(896, 600, TEXTBOX, this, "mail");
 
-	App->gui->AddElementText(896, 700, TEXT, "Account Password");
-	App->gui->AddElementTextBox(896, 725, TEXTBOX, "pasword");
+	App->gui->AddElementText(896, 700, TEXT, this, "Account Password");
+	App->gui->AddElementTextBox(896, 725, TEXTBOX, this, "pasword");
 
-	App->gui->AddElementText(153, 1000, TEXT, "Version 2.0.12 (6546)(Release)");
-	App->gui->AddElementText(65, 1025, TEXT, "Mar 30 2007");
-	App->gui->AddElementText(1860/2, 1030, TEXT, "Copyright 2004-2007 Blizzard Entertainment. All Rights Reserved.");
+	App->gui->AddElementText(153, 1000, TEXT, this, "Version 2.0.12 (6546)(Release)");
+	App->gui->AddElementText(65, 1025, TEXT, this, "Mar 30 2007");
+	App->gui->AddElementText(1860/2, 1030, TEXT, this, "Copyright 2004-2007 Blizzard Entertainment. All Rights Reserved.");
 
-	App->gui->AddElementButton(896, 820, BUTTON, BUTTON_1, "Login");
-	App->gui->AddElementButton(100, 850, BUTTON, BUTTON_1, "Manage Account");
-	App->gui->AddElementButton(100, 900, BUTTON, BUTTON_1, "Community Site");
+	App->gui->AddElementButton(896, 820, BUTTON, BUTTON_1, this, "Login");
+	App->gui->AddElementButton(100, 850, BUTTON, BUTTON_1, this, "Manage Account");
+	App->gui->AddElementButton(100, 900, BUTTON, BUTTON_1, this, "Community Site");
 
-	App->gui->AddElementButton(1590, 750, BUTTON, BUTTON_1, "Cinematics");
-	App->gui->AddElementButton(1590, 800, BUTTON, BUTTON_1, "Credits");
-	App->gui->AddElementButton(1590, 850, BUTTON, BUTTON_1, "Terms of Use");
-	App->gui->AddElementButton(1590, 1000, BUTTON, BUTTON_1, "Quit");
+	App->gui->AddElementButton(1590, 750, BUTTON, BUTTON_1, this, "Cinematics");
+	App->gui->AddElementButton(1590, 800, BUTTON, BUTTON_1, this, "Credits");
+	App->gui->AddElementButton(1590, 850, BUTTON, BUTTON_1, this, "Terms of Use");
+	App->gui->AddElementButton(1590, 1000, BUTTON, BUTTON_1, this, "Quit");
 
 	return true;
 }
@@ -61,30 +61,6 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
-
-	// debug pathfing ------------------
-	static iPoint origin;
-	static bool origin_selected = false;
-
-	int x, y;
-	App->input->GetMousePosition(x, y);
-	iPoint p = App->render->ScreenToWorld(x, y);
-	p = App->map->WorldToMap(p.x, p.y);
-
-	if(App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-	{
-		if(origin_selected == true)
-		{
-			App->pathfinding->CreatePath(origin, p);
-			origin_selected = false;
-		}
-		else
-		{
-			origin = p;
-			origin_selected = true;
-		}
-	}
-
 	return true;
 }
 
@@ -113,33 +89,8 @@ bool j1Scene::Update(float dt)
 		App->render->camera.x -= floor(200.0f * dt);
 
 
-	int x, y;
-	App->input->GetMousePosition(x, y);
-	iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y);
-	p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
-					App->map->data.width, App->map->data.height,
-					App->map->data.tile_width, App->map->data.tile_height,
-					App->map->data.tilesets.count(),
-					map_coordinates.x, map_coordinates.y);
-
-	//App->win->SetTitle(title.GetString());
-
-	// Debug pathfinding ------------------------------
-	//int x, y;
-	App->input->GetMousePosition(x, y);
-	iPoint p = App->render->ScreenToWorld(x, y);
-	p = App->map->WorldToMap(p.x, p.y);
-	p = App->map->MapToWorld(p.x, p.y);
-
-	App->render->Blit(debug_tex, p.x, p.y);
-
-	const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
-
-	for(uint i = 0; i < path->Count(); ++i)
-	{
-		iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		App->render->Blit(debug_tex, pos.x, pos.y);
-	}
+	
+	p2SString title("World of Warcraft");
 
 	return true;
 }

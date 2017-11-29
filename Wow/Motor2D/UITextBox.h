@@ -9,7 +9,7 @@ class UITextBox: public UIElements
 {
 public:
 
-	UITextBox(int x, int y, UIElementType type, const char* text);
+	UITextBox(int x, int y, UIElementType type, const char* text, j1Module* modul);
 	~UITextBox();
 
 	void Draw();
