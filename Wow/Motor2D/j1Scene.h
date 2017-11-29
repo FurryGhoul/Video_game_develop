@@ -39,13 +39,24 @@ public:
 
 private:
 	
-	SDL_Texture* debug_tex;
+	SDL_Texture* debug_tex = nullptr;
 	
-	GuiImage* banner;
+	GuiImage* banner = nullptr;
 	
-	GuiText* text;
+	GuiText* text = nullptr;
 
-	UIElements* log_button;
+	UIElements* MailBox=nullptr;
+	UIElements* PaswordBox = nullptr;
+	UIElements* LogButton = nullptr;
+	UIElements* ManAccountButton = nullptr;
+	UIElements* CommunityButton = nullptr;
+	UIElements* CinematicsButton = nullptr;
+	UIElements* CreditsButto = nullptr;
+	UIElements* TermsButton = nullptr;
+	UIElements* QuitButton = nullptr;
+
+	bool		exit = true;
+
 };
 
 #endif // __j1SCENE_H__

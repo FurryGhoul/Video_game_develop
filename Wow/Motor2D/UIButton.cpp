@@ -44,30 +44,23 @@ void UIButton::Draw()
 		App->render->Blit(ButtonText, position.x - App->render->camera.x- sizeTx /2 , position.y - App->render->camera.y+sizeTy/2);
 		App->render->DrawQuad(Elementrect, 255, 0, 255, 80);
 		
-		if (Iluminate() == true)
+		if (light)
 		{
 			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - size_x-12, position.y - App->render->camera.y-12, 2.0f);
 		}
 	}
 
-	Iluminate();
-
 }
 
-bool UIButton::Iluminate()
+void UIButton::Action()
 {
-	bool ret = false;
-	int x, y;
 	
-	App->input->GetMousePosition(x, y);
-
-	if (x>Elementrect.x && x<Elementrect.x+Elementrect.w)
+	if (!light)
 	{
-		if (y > Elementrect.y && y <Elementrect.y+Elementrect.h)
-		{
-			ret = true;
-		}
+		light = true;
 	}
-	
-	return ret;
+	else
+	{
+		light = false;
+	}
 }

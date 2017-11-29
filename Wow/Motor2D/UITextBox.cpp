@@ -41,11 +41,9 @@ void UITextBox::Draw()
 	{
 		App->render->Blit(hidentexture, position.x - App->render->camera.x - sizeTx / 1.5f, position.y - App->render->camera.y + sizeTy / 2, 1.5f);
 	}
-
-	HideText();
 }
 
-void UITextBox::HideText()
+void UITextBox::Action()
 {
 	bool inside = false;
 	int x, y;
@@ -62,7 +60,6 @@ void UITextBox::HideText()
 			}
 		}
 	}
-
 	if (x<Elementrect.x || x>Elementrect.x + Elementrect.w || y < Elementrect.y || y > Elementrect.y + Elementrect.h)
 	{
 		if (App->input->GetMouseButtonDown(1) == KEY_DOWN)

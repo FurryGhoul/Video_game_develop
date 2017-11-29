@@ -56,7 +56,7 @@ public:
 
 	void AddBackground(int x, int y, UIElementType type, j1Module* modul);
 	void AddElementText(int x, int y, UIElementType type, j1Module* modul, const char* text=nullptr);
-	void AddElementTextBox(int x, int y, UIElementType type, j1Module* modul, const char* text = nullptr);
+	UIElements* AddElementTextBox(int x, int y, UIElementType type, j1Module* modul, const char* text = nullptr);
 	void AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect, j1Module* modul);
 	UIElements* AddElementButton(int x, int y, UIElementType type, ButtonType btype, j1Module* modul, const char* text = nullptr);
 	

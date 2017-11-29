@@ -20,7 +20,7 @@ public:
 	~UIButton();
 
 	void Draw();
-	bool Iluminate();
+	void Action();
 
 private:
 
@@ -33,6 +33,10 @@ private:
 
 	uint sizeTx;
 	uint sizeTy;
+
+	bool light = false;
+
+
 
 };
 

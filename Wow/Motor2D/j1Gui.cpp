@@ -64,11 +64,19 @@ bool j1Gui::PostUpdate()
 	{
 		element->data->Draw();
 		
-		if (CheckMouse(element->data) == true && element->data->mousein==false)
+		if (CheckMouse(element->data) == true )
 		{
-			element->data->callback->GUIEvent(MOUSE_ENTER, element->data);
-			element->data->mousein = true;
-			element->data->mouseout = false;
+			if (element->data->mousein == false)
+			{
+				element->data->callback->GUIEvent(MOUSE_ENTER, element->data);
+				element->data->mousein = true;
+				element->data->mouseout = false;
+			}
+			if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+			{
+				element->data->callback->GUIEvent(MOUSE_CLICK, element->data);
+			}
+			
 		}
 		if (CheckMouse(element->data) == false && element->data->mouseout == false)
 		{
@@ -135,11 +143,13 @@ UIElements* j1Gui::AddElementButton(int x, int y, UIElementType type, ButtonType
 	return element_created;
 }
 
-void j1Gui::AddElementTextBox(int x, int y, UIElementType type, j1Module* modul, const char* text)
+UIElements* j1Gui::AddElementTextBox(int x, int y, UIElementType type, j1Module* modul, const char* text)
 {
 	UIElements* element_created;
 	element_created = new UITextBox(x, y, type, text, modul);
 	elements.add(element_created);
+
+	return element_created;
 }
 
 void j1Gui::DeleteElements(UIElements* element)

@@ -22,6 +22,7 @@ public:
 	~UIElements();
 
 	virtual void Draw() {};
+	virtual void Action() {};
 
 public:
 
@@ -32,8 +33,10 @@ public:
 
 	uint			size_x;
 	uint			size_y;
+	
 	bool			mousein=false;
 	bool			mouseout=true;
+	bool			action = false;
 
 	float scale;
 

@@ -13,7 +13,7 @@ public:
 	~UITextBox();
 
 	void Draw();
-	void HideText();
+	void Action();
 
 private:
 

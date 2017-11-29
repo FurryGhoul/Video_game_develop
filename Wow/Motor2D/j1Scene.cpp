@@ -37,23 +37,23 @@ bool j1Scene::Start()
 	App->gui->AddBackground(0, 0, BACKGROUND, this);
 
 	App->gui->AddElementText(896, 570, TEXT,this,"Account Name");
-	App->gui->AddElementTextBox(896, 600, TEXTBOX, this, "mail");
+	MailBox=App->gui->AddElementTextBox(896, 600, TEXTBOX, this, "mail");
 
 	App->gui->AddElementText(896, 700, TEXT, this, "Account Password");
-	App->gui->AddElementTextBox(896, 730, TEXTBOX, this, "pasword");
+	PaswordBox=App->gui->AddElementTextBox(896, 730, TEXTBOX, this, "pasword");
 
 	App->gui->AddElementText(153, 1000, TEXT, this, "Version 2.0.12 (6546)(Release)");
 	App->gui->AddElementText(65, 1025, TEXT, this, "Mar 30 2007");
 	App->gui->AddElementText(1860/2, 1030, TEXT, this, "Copyright 2004-2007 Blizzard Entertainment. All Rights Reserved.");
 
-	log_button = App->gui->AddElementButton(896, 820, BUTTON, BUTTON_1, this, "Login");
-	App->gui->AddElementButton(100, 850, BUTTON, BUTTON_1, this, "Manage Account");
-	App->gui->AddElementButton(100, 900, BUTTON, BUTTON_1, this, "Community Site");
+	LogButton = App->gui->AddElementButton(896, 820, BUTTON, BUTTON_1, this, "Login");
+	ManAccountButton=App->gui->AddElementButton(100, 850, BUTTON, BUTTON_1, this, "Manage Account");
+	CommunityButton=App->gui->AddElementButton(100, 900, BUTTON, BUTTON_1, this, "Community Site");
 
-	App->gui->AddElementButton(1590, 750, BUTTON, BUTTON_1, this, "Cinematics");
-	App->gui->AddElementButton(1590, 800, BUTTON, BUTTON_1, this, "Credits");
-	App->gui->AddElementButton(1590, 850, BUTTON, BUTTON_1, this, "Terms of Use");
-	App->gui->AddElementButton(1590, 1000, BUTTON, BUTTON_1, this, "Quit");
+	CinematicsButton=App->gui->AddElementButton(1590, 750, BUTTON, BUTTON_1, this, "Cinematics");
+	CreditsButto=App->gui->AddElementButton(1590, 800, BUTTON, BUTTON_1, this, "Credits");
+	TermsButton=App->gui->AddElementButton(1590, 850, BUTTON, BUTTON_1, this, "Terms of Use");
+	QuitButton=App->gui->AddElementButton(1590, 1000, BUTTON, BUTTON_1, this, "Quit");
 
 	return true;
 }
@@ -98,12 +98,10 @@ bool j1Scene::Update(float dt)
 // Called each loop iteration
 bool j1Scene::PostUpdate()
 {
-	bool ret = true;
-
 	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
+		exit = false;
 
-	return ret;
+	return exit;
 }
 
 // Called before quitting
@@ -118,9 +116,104 @@ bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
 {
 	if (eventType == MOUSE_ENTER)
 	{
-		if (element == log_button)
+		if (element == LogButton)
 		{
-			LOG("holiiiii");
+			LogButton->Action();
+		}
+		if (element == ManAccountButton)
+		{
+			ManAccountButton->Action();
+		}
+		if (element == CommunityButton)
+		{
+			CommunityButton->Action();
+		}
+		if (element == CinematicsButton)
+		{
+			CinematicsButton->Action();
+		}
+		if (element == CreditsButto)
+		{
+			CreditsButto->Action();
+		}
+		if (element == TermsButton)
+		{
+			TermsButton->Action();
+		}
+		if (element == QuitButton)
+		{
+			QuitButton->Action();
+		}
+	}
+	
+	if (eventType == MOUSE_LEAVE)
+	{
+		if (element == LogButton)
+		{
+			LogButton->Action();
+		}
+		if (element == ManAccountButton)
+		{
+			ManAccountButton->Action();
+		}
+		if (element == CommunityButton)
+		{
+			CommunityButton->Action();
+		}
+		if (element == CinematicsButton)
+		{
+			CinematicsButton->Action();
+		}
+		if (element == CreditsButto)
+		{
+			CreditsButto->Action();
+		}
+		if (element == TermsButton)
+		{
+			TermsButton->Action();
+		}
+		if (element == QuitButton)
+		{
+			QuitButton->Action();
+		}
+	}
+	if (eventType == MOUSE_CLICK)
+	{
+		if (element == LogButton)
+		{
+			LOG("CLICK!!");
+		}
+		if (element == ManAccountButton)
+		{
+			LOG("CLICK!!");
+		}
+		if (element == CommunityButton)
+		{
+			LOG("CLICK!!");
+		}
+		if (element == CinematicsButton)
+		{
+			LOG("CLICK!!");
+		}
+		if (element == CreditsButto)
+		{
+			LOG("CLICK!!");
+		}
+		if (element == TermsButton)
+		{
+			LOG("CLICK!!");
+		}
+		if (element == QuitButton)
+		{
+			exit = false;
+		}
+		if (element == MailBox)
+		{
+			MailBox->Action();
+		}
+		if (element == PaswordBox)
+		{
+			PaswordBox->Action();
 		}
 	}
 
