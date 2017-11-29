@@ -20,6 +20,12 @@ UITextBox::UITextBox(int x, int y, UIElementType type, const char* text, j1Modul
 	App->tex->GetSize(hidentexture, sizeTx, sizeTy);
 
 	scale = 2.0f;
+
+	int rect_x = position.x - (size_x / 2)*scale;
+	int rect_y = position.y;
+
+	Elementrect = { rect_x,rect_y,(int)size_x*(int)scale,(int)size_y*(int)scale };
+
 }
 
 UITextBox::~UITextBox()
@@ -29,7 +35,8 @@ UITextBox::~UITextBox()
 void UITextBox::Draw()
 {
 	App->render->Blit(App->gui->textbox, position.x - App->render->camera.x-size_x/2*scale, position.y - App->render->camera.y,scale);
-	
+	App->render->DrawQuad(Elementrect, 255, 255, 0, 80);
+
 	if (hide == false)
 	{
 		App->render->Blit(hidentexture, position.x - App->render->camera.x - sizeTx / 1.5f, position.y - App->render->camera.y + sizeTy / 2, 1.5f);
@@ -45,15 +52,9 @@ void UITextBox::HideText()
 
 	App->input->GetMousePosition(x, y);
 
-	int limit_xl = position.x - App->render->camera.x - (size_x / 2) * 2;
-	int limit_xr = position.x - App->render->camera.x + (size_x / 2) * 2;
-	int limit_yu = position.y - App->render->camera.y - (size_y / 2) * 2;
-	int limit_yd = position.y - App->render->camera.y + (size_y / 2) * 2;
-
-
-	if (x>limit_xl && x<limit_xr)
+	if (x>Elementrect.x && x<Elementrect.x + Elementrect.w)
 	{
-		if (y > limit_yu && y < limit_yd)
+		if (y > Elementrect.y && y <Elementrect.y+Elementrect.h)
 		{
 			if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 			{
@@ -62,7 +63,7 @@ void UITextBox::HideText()
 		}
 	}
 
-	if (x<limit_xl || x>limit_xr || y < limit_yu || y > limit_yd)
+	if (x<Elementrect.x || x>Elementrect.x + Elementrect.w || y < Elementrect.y || y > Elementrect.y + Elementrect.h)
 	{
 		if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 		{

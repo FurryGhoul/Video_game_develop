@@ -26,8 +26,6 @@ UIButton::UIButton(int x, int y, UIElementType type, ButtonType buttontype, cons
 	int rect_x = position.x - (size_x / 2)*scale;
 	int rect_y = position.y;
 
-	
-
 	Elementrect = { rect_x,rect_y,(int)size_x*(int)scale,(int)size_y*(int)scale };
 	
 }
@@ -62,12 +60,6 @@ bool UIButton::Iluminate()
 	int x, y;
 	
 	App->input->GetMousePosition(x, y);
-	
-	int limit_xl = position.x - App->render->camera.x - (size_x / 2)*scale;
-	int limit_xr = position.x - App->render->camera.x + (size_x / 2)*scale;
-	int limit_yu = position.y - App->render->camera.y - (size_y)* 2;
-	int limit_yd = position.y - App->render->camera.y + (size_y) * 2;
-
 
 	if (x>Elementrect.x && x<Elementrect.x+Elementrect.w)
 	{

@@ -35,10 +35,17 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	bool GUIEvent(UIEvents eventType, UIElements* element);
+
 private:
+	
 	SDL_Texture* debug_tex;
+	
 	GuiImage* banner;
+	
 	GuiText* text;
+
+	UIElements* log_button;
 };
 
 #endif // __j1SCENE_H__

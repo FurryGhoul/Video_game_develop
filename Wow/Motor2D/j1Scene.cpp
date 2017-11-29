@@ -40,13 +40,13 @@ bool j1Scene::Start()
 	App->gui->AddElementTextBox(896, 600, TEXTBOX, this, "mail");
 
 	App->gui->AddElementText(896, 700, TEXT, this, "Account Password");
-	App->gui->AddElementTextBox(896, 725, TEXTBOX, this, "pasword");
+	App->gui->AddElementTextBox(896, 730, TEXTBOX, this, "pasword");
 
 	App->gui->AddElementText(153, 1000, TEXT, this, "Version 2.0.12 (6546)(Release)");
 	App->gui->AddElementText(65, 1025, TEXT, this, "Mar 30 2007");
 	App->gui->AddElementText(1860/2, 1030, TEXT, this, "Copyright 2004-2007 Blizzard Entertainment. All Rights Reserved.");
 
-	App->gui->AddElementButton(896, 820, BUTTON, BUTTON_1, this, "Login");
+	log_button = App->gui->AddElementButton(896, 820, BUTTON, BUTTON_1, this, "Login");
 	App->gui->AddElementButton(100, 850, BUTTON, BUTTON_1, this, "Manage Account");
 	App->gui->AddElementButton(100, 900, BUTTON, BUTTON_1, this, "Community Site");
 
@@ -110,6 +110,19 @@ bool j1Scene::PostUpdate()
 bool j1Scene::CleanUp()
 {
 	LOG("Freeing scene");
+
+	return true;
+}
+
+bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
+{
+	if (eventType == MOUSE_ENTER)
+	{
+		if (element == log_button)
+		{
+			LOG("holiiiii");
+		}
+	}
 
 	return true;
 }

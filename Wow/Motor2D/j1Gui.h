@@ -58,8 +58,11 @@ public:
 	void AddElementText(int x, int y, UIElementType type, j1Module* modul, const char* text=nullptr);
 	void AddElementTextBox(int x, int y, UIElementType type, j1Module* modul, const char* text = nullptr);
 	void AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect, j1Module* modul);
-	void AddElementButton(int x, int y, UIElementType type, ButtonType btype, j1Module* modul, const char* text = nullptr);
+	UIElements* AddElementButton(int x, int y, UIElementType type, ButtonType btype, j1Module* modul, const char* text = nullptr);
+	
 	void DeleteElements(UIElements* element);
+
+	bool CheckMouse(UIElements*)const;
 
 
 	SDL_Texture* GetAtlas() const;

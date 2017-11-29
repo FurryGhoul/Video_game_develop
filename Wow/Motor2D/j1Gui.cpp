@@ -63,14 +63,25 @@ bool j1Gui::PostUpdate()
 	while (element != nullptr)
 	{
 		element->data->Draw();
+		
+		if (CheckMouse(element->data) == true && element->data->mousein==false)
+		{
+			element->data->callback->GUIEvent(MOUSE_ENTER, element->data);
+			element->data->mousein = true;
+			element->data->mouseout = false;
+		}
+		if (CheckMouse(element->data) == false && element->data->mouseout == false)
+		{
+			element->data->callback->GUIEvent(MOUSE_LEAVE, element->data);
+			element->data->mousein = false;
+			element->data->mouseout = true;
+		}
+		
 		element = element->next;
 	}
 
 	return true;
 }
-
-// Called after all Updates
-
 
 // Called before quitting
 bool j1Gui::CleanUp()
@@ -115,11 +126,13 @@ void j1Gui::AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect, j1
 	elements.add(element_created);
 }
 
-void j1Gui::AddElementButton(int x, int y, UIElementType type, ButtonType btype, j1Module* modul, const char* text)
+UIElements* j1Gui::AddElementButton(int x, int y, UIElementType type, ButtonType btype, j1Module* modul, const char* text)
 {
 	UIElements* element_created;
 	element_created = new UIButton(x, y, type, btype, text, modul);
 	elements.add(element_created);
+
+	return element_created;
 }
 
 void j1Gui::AddElementTextBox(int x, int y, UIElementType type, j1Module* modul, const char* text)
@@ -132,4 +145,22 @@ void j1Gui::AddElementTextBox(int x, int y, UIElementType type, j1Module* modul,
 void j1Gui::DeleteElements(UIElements* element)
 {
 	RELEASE(element);
+}
+
+bool j1Gui::CheckMouse(UIElements* element)const
+{
+	bool ret = false;
+	int x, y;
+
+	App->input->GetMousePosition(x, y);
+
+	if (x>element->Elementrect.x && x<element->Elementrect.x + element->Elementrect.w)
+	{
+		if (y > element->Elementrect.y && y <element->Elementrect.y + element->Elementrect.h)
+		{
+			ret = true;
+		}
+	}
+
+	return ret;
 }

@@ -32,6 +32,8 @@ public:
 
 	uint			size_x;
 	uint			size_y;
+	bool			mousein=false;
+	bool			mouseout=true;
 
 	float scale;
 

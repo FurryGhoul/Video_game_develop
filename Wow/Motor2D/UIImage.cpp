@@ -9,6 +9,7 @@
 UIImage::UIImage(int x, int y, UIElementType type,SDL_Rect* rect, j1Module* modul):UIElements(x,y,type,modul)
 {
 	rectangle = rect;
+	Elementrect = *rect;
 }
 
 
