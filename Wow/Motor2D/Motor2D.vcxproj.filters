@@ -67,6 +67,9 @@
     <ClCompile Include="UITextBox.cpp">
       <Filter>Desenvolupament  ========\Modules\UI</Filter>
     </ClCompile>
+    <ClCompile Include="UIWindow.cpp">
+      <Filter>Desenvolupament  ========\Modules\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -151,6 +154,9 @@
       <Filter>Desenvolupament  ========\Modules\UI</Filter>
     </ClInclude>
     <ClInclude Include="UITextBox.h">
+      <Filter>Desenvolupament  ========\Modules\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindow.h">
       <Filter>Desenvolupament  ========\Modules\UI</Filter>
     </ClInclude>
   </ItemGroup>

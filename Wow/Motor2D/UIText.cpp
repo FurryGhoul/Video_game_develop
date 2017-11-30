@@ -32,5 +32,9 @@ void UIText::Draw()
 {
 	App->render->Blit(BlackBackground, position.x - App->render->camera.x - size_x / 2 + 2, position.y - App->render->camera.y+2);
 	App->render->Blit(texture, position.x-App->render->camera.x- size_x /2, position.y- App->render->camera.y);
-	App->render->DrawQuad(Elementrect, 0, 255, 255, 80);
+	
+	if (debug == true)
+	{
+		App->render->DrawQuad(Elementrect, 0, 255, 255, 80);
+	}
 }

@@ -12,6 +12,7 @@
 #include "UIImage.h"
 #include "UIButton.h"
 #include "UITextBox.h"
+#include "UIWindow.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -87,6 +88,25 @@ bool j1Gui::PostUpdate()
 		
 		element = element->next;
 	}
+	
+	p2List_item<UIElements*>* element2=elements.start;
+	
+	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+	{
+		while (element2 != nullptr)
+		{
+			if (!element2->data->debug)
+			{
+				element2->data->debug = true;
+			}
+			else
+			{
+				element2->data->debug = false;
+			}
+
+			element2 = element2->next;
+		}
+	}
 
 	return true;
 }
@@ -147,6 +167,15 @@ UIElements* j1Gui::AddElementTextBox(int x, int y, UIElementType type, j1Module*
 {
 	UIElements* element_created;
 	element_created = new UITextBox(x, y, type, text, modul);
+	elements.add(element_created);
+
+	return element_created;
+}
+
+UIElements* j1Gui::AddElementWindow(int x, int y, UIElementType type, j1Module* modul, p2List<UIElements*>* elementslist)
+{
+	UIElements* element_created;
+	element_created = new UIWindow(x, y, type, modul,elementslist);
 	elements.add(element_created);
 
 	return element_created;

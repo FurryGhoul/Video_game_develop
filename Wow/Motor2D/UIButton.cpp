@@ -38,18 +38,19 @@ UIButton::~UIButton()
 
 void UIButton::Draw()
 {
-	if (btype == BUTTON_1)
-	{
+	
 		App->render->Blit(ButtonTex, position.x - App->render->camera.x - size_x, position.y - App->render->camera.y,2.0f);
 		App->render->Blit(ButtonText, position.x - App->render->camera.x- sizeTx /2 , position.y - App->render->camera.y+sizeTy/2);
-		App->render->DrawQuad(Elementrect, 255, 0, 255, 80);
+		
+		if (debug == true)
+		{
+			App->render->DrawQuad(Elementrect, 255, 0, 255, 80);
+		}
 		
 		if (light)
 		{
 			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - size_x-12, position.y - App->render->camera.y-12, 2.0f);
 		}
-	}
-
 }
 
 void UIButton::Action()

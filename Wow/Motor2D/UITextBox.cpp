@@ -6,10 +6,9 @@
 #include "j1Gui.h"
 #include "UITextBox.h"
 
-
-
 UITextBox::UITextBox(int x, int y, UIElementType type, const char* text, j1Module* modul): UIElements(x,y,type,modul)
 {
+
 	if (text != nullptr)
 	{
 		HidenText = text;
@@ -35,7 +34,11 @@ UITextBox::~UITextBox()
 void UITextBox::Draw()
 {
 	App->render->Blit(App->gui->textbox, position.x - App->render->camera.x-size_x/2*scale, position.y - App->render->camera.y,scale);
-	App->render->DrawQuad(Elementrect, 255, 255, 0, 80);
+
+	if (debug == true)
+	{
+		App->render->DrawQuad(Elementrect, 255, 255, 0, 80);
+	}
 
 	if (hide == false)
 	{

@@ -29,7 +29,8 @@ public:
 	SDL_Rect		Elementrect;
 	fPoint			position;
 	UIElementType	type;
-	j1Module*		callback=nullptr;
+	
+	j1Module*		callback = nullptr;
 
 	uint			size_x;
 	uint			size_y;
@@ -37,6 +38,7 @@ public:
 	bool			mousein=false;
 	bool			mouseout=true;
 	bool			action = false;
+	bool			debug = false;
 
 	float scale;
 
