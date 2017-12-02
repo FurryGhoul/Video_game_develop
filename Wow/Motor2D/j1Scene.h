@@ -56,7 +56,9 @@ private:
 	UIElements* TermsButton = nullptr;
 	UIElements* QuitButton = nullptr;
 	UIElements* windbut = nullptr;
+	UIElements* windbut2 = nullptr;
 	UIElements* window_1 = nullptr;
+	UIElements* window_2 = nullptr;
 
 	p2List<UIElements*> winElements;
 

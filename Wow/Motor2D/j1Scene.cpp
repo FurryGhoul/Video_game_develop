@@ -57,6 +57,8 @@ bool j1Scene::Start()
 
 	windbut= App->gui->AddElementButton(100, 50, BUTTON, BUTTON_1, this, "window",true);
 	winElements.add(windbut);
+	windbut2 = App->gui->AddElementButton(100, 100, BUTTON, BUTTON_1, this, "window", true);
+	winElements.add(windbut2);
 
 	window_1 = App->gui->AddElementWindow(100, 200, WINDOWS, this, &winElements);
 
