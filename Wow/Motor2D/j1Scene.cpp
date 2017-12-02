@@ -55,6 +55,11 @@ bool j1Scene::Start()
 	TermsButton=App->gui->AddElementButton(1590, 850, BUTTON, BUTTON_1, this, "Terms of Use");
 	QuitButton=App->gui->AddElementButton(1590, 1000, BUTTON, BUTTON_1, this, "Quit");
 
+	windbut= App->gui->AddElementButton(100, 50, BUTTON, BUTTON_1, this, "window",true);
+	winElements.add(windbut);
+
+	window_1 = App->gui->AddElementWindow(100, 200, WINDOWS, this, &winElements);
+
 	return true;
 }
 
@@ -87,6 +92,19 @@ bool j1Scene::Update(float dt)
 
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= floor(200.0f * dt);
+	
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
+	{
+		if (window_1->show)
+		{
+			window_1->show = false;
+			window_1->action = false;
+		}
+		else
+		{
+			window_1->show = true;
+		}
+	}
 
 
 	
@@ -144,6 +162,10 @@ bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
 		{
 			QuitButton->Action();
 		}
+		if (element == windbut)
+		{
+			windbut->Action();
+		}
 	}
 	
 	if (eventType == MOUSE_LEAVE)
@@ -175,6 +197,10 @@ bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
 		if (element == QuitButton)
 		{
 			QuitButton->Action();
+		}
+		if (element == windbut)
+		{
+			windbut->Action();
 		}
 	}
 	if (eventType == MOUSE_CLICK)
@@ -214,6 +240,20 @@ bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
 		if (element == PaswordBox)
 		{
 			PaswordBox->Action();
+		}
+		if (element == window_1)
+		{
+			window_1->action = true;
+		}
+	}
+	if (eventType == MOUSE_STOP_CLICK)
+	{
+		if (element == window_1)
+		{
+			if (window_1->show)
+			{
+				window_1->action = false;
+			}
 		}
 	}
 

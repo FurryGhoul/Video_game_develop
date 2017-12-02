@@ -12,6 +12,7 @@ enum UIElementType
 	IMAGE,
 	BUTTON,
 	TEXTBOX,
+	WINDOWS
 };
 
 class UIElements:public j1Gui
@@ -39,6 +40,10 @@ public:
 	bool			mouseout=true;
 	bool			action = false;
 	bool			debug = false;
+	bool			show = false;
+	bool			isWindowElement = false;
+
+	SDL_Texture*	ElementTexture = nullptr;
 
 	float scale;
 

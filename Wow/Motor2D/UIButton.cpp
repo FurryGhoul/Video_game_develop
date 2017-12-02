@@ -18,15 +18,10 @@ UIButton::UIButton(int x, int y, UIElementType type, ButtonType buttontype, cons
 	}
 	
 	btype = buttontype;
-	ButtonTex = App->gui->buttons[0];
+	ElementTexture = App->gui->buttons[0];
 	scale = 2.0f;
 
-	App->tex->GetSize(ButtonTex, size_x, size_y);
-
-	int rect_x = position.x - (size_x / 2)*scale;
-	int rect_y = position.y;
-
-	Elementrect = { rect_x,rect_y,(int)size_x*(int)scale,(int)size_y*(int)scale };
+	App->tex->GetSize(ElementTexture, size_x, size_y);
 	
 }
 
@@ -38,19 +33,25 @@ UIButton::~UIButton()
 
 void UIButton::Draw()
 {
-	
-		App->render->Blit(ButtonTex, position.x - App->render->camera.x - size_x, position.y - App->render->camera.y,2.0f);
-		App->render->Blit(ButtonText, position.x - App->render->camera.x- sizeTx /2 , position.y - App->render->camera.y+sizeTy/2);
-		
+	if (!isWindowElement)
+	{
+		int rect_x = position.x - (size_x / 2)*scale;
+		int rect_y = position.y;
+
+		Elementrect = { rect_x,rect_y,(int)size_x*(int)scale,(int)size_y*(int)scale };
+		App->render->Blit(ElementTexture, position.x - App->render->camera.x - size_x, position.y - App->render->camera.y, 2.0f);
+		App->render->Blit(ButtonText, position.x - App->render->camera.x - sizeTx / 2, position.y - App->render->camera.y + sizeTy / 2);
+
 		if (debug == true)
 		{
 			App->render->DrawQuad(Elementrect, 255, 0, 255, 80);
 		}
-		
+
 		if (light)
 		{
-			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - size_x-12, position.y - App->render->camera.y-12, 2.0f);
+			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - size_x - 12, position.y - App->render->camera.y - 12, 2.0f);
 		}
+	}
 }
 
 void UIButton::Action()

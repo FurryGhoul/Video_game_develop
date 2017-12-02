@@ -7,6 +7,7 @@ struct SDL_Texture;
 class GuiImage;
 class GuiText;
 enum UIElementType;
+class UIWindow;
 
 class j1Scene : public j1Module
 {
@@ -54,6 +55,10 @@ private:
 	UIElements* CreditsButto = nullptr;
 	UIElements* TermsButton = nullptr;
 	UIElements* QuitButton = nullptr;
+	UIElements* windbut = nullptr;
+	UIElements* window_1 = nullptr;
+
+	p2List<UIElements*> winElements;
 
 	bool		exit = true;
 

@@ -77,8 +77,12 @@ bool j1Gui::PostUpdate()
 			{
 				element->data->callback->GUIEvent(MOUSE_CLICK, element->data);
 			}
-			
+			if (App->input->GetMouseButtonDown(1) == KEY_UP)
+			{
+				element->data->callback->GUIEvent(MOUSE_STOP_CLICK, element->data);
+			}
 		}
+
 		if (CheckMouse(element->data) == false && element->data->mouseout == false)
 		{
 			element->data->callback->GUIEvent(MOUSE_LEAVE, element->data);
@@ -154,10 +158,11 @@ void j1Gui::AddElementImage(int x, int y, UIElementType type, SDL_Rect* rect, j1
 	elements.add(element_created);
 }
 
-UIElements* j1Gui::AddElementButton(int x, int y, UIElementType type, ButtonType btype, j1Module* modul, const char* text)
+UIElements* j1Gui::AddElementButton(int x, int y, UIElementType type, ButtonType btype, j1Module* modul, const char* text, bool iswinelem)
 {
 	UIElements* element_created;
 	element_created = new UIButton(x, y, type, btype, text, modul);
+	element_created->isWindowElement = iswinelem;
 	elements.add(element_created);
 
 	return element_created;
