@@ -209,7 +209,7 @@ bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
 	{
 		if (element == LogButton)
 		{
-			LOG("CLICK!!");
+			LogButton->action = true;
 		}
 		if (element == ManAccountButton)
 		{
@@ -231,9 +231,14 @@ bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
 		{
 			LOG("CLICK!!");
 		}
+		
+		if (element == windbut)
+		{
+			windbut->action = true;
+		}
 		if (element == QuitButton)
 		{
-			exit = false;
+			QuitButton->action=true;
 		}
 		if (element == MailBox)
 		{
@@ -256,6 +261,22 @@ bool j1Scene::GUIEvent(UIEvents eventType, UIElements* element)
 			{
 				window_1->action = false;
 			}
+		}
+		if (element == QuitButton)
+		{
+			exit = false;
+		}
+		if (element == LogButton)
+		{
+			LogButton->action = false;
+		}
+		if (element == QuitButton)
+		{
+			QuitButton->action = false;
+		}
+		if (element == windbut)
+		{
+			windbut->action = false;
 		}
 	}
 

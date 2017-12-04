@@ -65,25 +65,27 @@ bool j1Gui::PostUpdate()
 	{
 		element->data->Draw();
 		
-		if (CheckMouse(element->data) == true )
+		if (CheckMouse(element->data) == true)
 		{
-			if (element->data->mousein == false)
+			if (element->data->mousein == false && elementclicked==false)
 			{
 				element->data->callback->GUIEvent(MOUSE_ENTER, element->data);
 				element->data->mousein = true;
 				element->data->mouseout = false;
 			}
-			if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+			if (App->input->GetMouseButtonDown(1) == KEY_DOWN && elementclicked == false)
 			{
 				element->data->callback->GUIEvent(MOUSE_CLICK, element->data);
+				elementclicked = true;
 			}
-			if (App->input->GetMouseButtonDown(1) == KEY_UP)
+			if (App->input->GetMouseButtonDown(1) == KEY_UP )
 			{
 				element->data->callback->GUIEvent(MOUSE_STOP_CLICK, element->data);
+				elementclicked = false;
 			}
 		}
-
-		if (CheckMouse(element->data) == false && element->data->mouseout == false)
+		
+		if (CheckMouse(element->data) == false && element->data->mouseout == false )
 		{
 			element->data->callback->GUIEvent(MOUSE_LEAVE, element->data);
 			element->data->mousein = false;
@@ -92,7 +94,12 @@ bool j1Gui::PostUpdate()
 		
 		element = element->next;
 	}
-	
+
+	if (App->input->GetMouseButtonDown(1) == KEY_UP && elementclicked == true)
+	{
+		elementclicked = false;
+	}
+
 	p2List_item<UIElements*>* element2=elements.start;
 	
 	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)

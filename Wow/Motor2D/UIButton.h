@@ -21,6 +21,7 @@ public:
 
 	void Draw();
 	void Action();
+	void Move();
 
 private:
 

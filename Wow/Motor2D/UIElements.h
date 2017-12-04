@@ -28,7 +28,11 @@ public:
 public:
 
 	SDL_Rect		Elementrect;
+	
 	fPoint			position;
+	iPoint			mousestart = { 0,0 };
+	iPoint			mouseend = { 0,0 };
+
 	UIElementType	type;
 	
 	j1Module*		callback = nullptr;

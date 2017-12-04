@@ -28,6 +28,7 @@ UIWindow::UIWindow(int x, int y, UIElementType type, j1Module* modul,p2List<UIEl
 	}
 
 	scale = 1.0f;
+
 }
 
 

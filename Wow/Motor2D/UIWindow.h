@@ -18,9 +18,6 @@ private:
 	p2List<UIElements*>* windowelements;
 	SDL_Rect window;
 
-	iPoint mousestart;
-	iPoint mouseend = { 0,0 };
-
 };
 
 #endif //__WINDOW_H__

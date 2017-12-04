@@ -51,6 +51,24 @@ void UIButton::Draw()
 		{
 			App->render->Blit(App->gui->buttons[1], position.x - App->render->camera.x - size_x - 12, position.y - App->render->camera.y - 12, 2.0f);
 		}
+
+		if (action)
+		{
+			Move();
+		}
+
+		App->input->GetMousePosition(mouseend.x, mouseend.y);
+	}
+}
+
+void UIButton::Move()
+{
+	App->input->GetMousePosition(mousestart.x, mousestart.y);
+
+	if (mousestart.x != mouseend.x || mousestart.y != mouseend.y)
+	{
+		position.x += mousestart.x - mouseend.x;
+		position.y += mousestart.y - mouseend.y;
 	}
 }
 

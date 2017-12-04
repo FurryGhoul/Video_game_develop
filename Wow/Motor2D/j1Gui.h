@@ -82,6 +82,7 @@ private:
 
 	SDL_Texture* atlas=nullptr;
 	p2SString atlas_file_name;
+	bool elementclicked = false;
 };
 
 #endif // __j1GUI_H__
