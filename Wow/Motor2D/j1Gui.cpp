@@ -172,7 +172,7 @@ UIElements* j1Gui::AddElementButton(int x, int y, UIElementType type, ButtonType
 	element_created->isWindowElement = iswinelem;
 	elements.add(element_created);
 
-	return element_created;
+	return element_created;                                                  
 }
 
 UIElements* j1Gui::AddElementTextBox(int x, int y, UIElementType type, j1Module* modul, const char* text)

@@ -24,6 +24,7 @@ public:
 
 	virtual void Draw() {};
 	virtual void Action() {};
+	UIElementType GetElementType();
 
 public:
 
